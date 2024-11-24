@@ -13,12 +13,12 @@ describe('Webpack Production Build', () => {
 
       // lets remove the async option at all as the plugin should now how to set it by default
       await sandbox.patch(
-        'webpack.config.js',
+        'rspack.config.js',
         ['    new TsCheckerRspackPlugin({', '      async: false,', '    }),'].join('\n'),
         ['    new TsCheckerRspackPlugin(),'].join('\n')
       );
 
-      const result = await sandbox.exec('yarn webpack --mode=production');
+      const result = await sandbox.exec('yarn rspack build --mode=production');
       const errors = extractWebpackErrors(result);
 
       expect(errors).toEqual([]);
@@ -40,12 +40,12 @@ describe('Webpack Production Build', () => {
     await sandbox.install('yarn', { webpack: '^5.11.0' });
 
     await sandbox.patch(
-      'webpack.config.js',
+      'rspack.config.js',
       'async: false,',
       'async: false, typescript: { mode: "write-dts" },'
     );
 
-    const result = await sandbox.exec('yarn webpack --mode=production');
+    const result = await sandbox.exec('yarn rspack build --mode=production');
     const errors = extractWebpackErrors(result);
 
     expect(errors).toEqual([]);
@@ -69,14 +69,14 @@ describe('Webpack Production Build', () => {
 
       // remove the async option at all as the plugin should now how to set it by default
       await sandbox.patch(
-        'webpack.config.js',
+        'rspack.config.js',
         ['    new TsCheckerRspackPlugin({', '      async: false,', '    }),'].join('\n'),
         ['    new TsCheckerRspackPlugin(),'].join('\n')
       );
 
       // introduce an error in the project
       await sandbox.remove('src/model/User.ts');
-      const result = await sandbox.exec('yarn webpack --mode=production', { fail: true });
+      const result = await sandbox.exec('yarn rspack build --mode=production', { fail: true });
 
       // remove npm related output
       const output = stripAnsi(String(result)).replace(/npm (ERR!|WARN).*/g, '');

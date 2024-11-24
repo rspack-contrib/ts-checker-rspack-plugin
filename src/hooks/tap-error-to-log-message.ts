@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import type { TsCheckerRspackPluginConfig } from '../plugin-config';
 import { getPluginHooks } from '../plugin-hooks';
@@ -7,7 +7,7 @@ import { RpcExitError } from '../rpc';
 import { AbortError } from '../utils/async/abort-error';
 
 function tapErrorToLogMessage(
-  compiler: webpack.Compiler,
+  compiler: rspack.Compiler,
   config: TsCheckerRspackPluginConfig
 ) {
   const hooks = getPluginHooks(compiler);

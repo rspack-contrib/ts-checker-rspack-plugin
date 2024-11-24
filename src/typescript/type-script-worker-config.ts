@@ -1,6 +1,6 @@
 import path from 'path';
 
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import type { TypeScriptConfigOverwrite } from './type-script-config-overwrite';
 import type { TypeScriptDiagnosticsOptions } from './type-script-diagnostics-options';
@@ -20,7 +20,7 @@ interface TypeScriptWorkerConfig {
 }
 
 function createTypeScriptWorkerConfig(
-  compiler: webpack.Compiler,
+  compiler: rspack.Compiler,
   options: TypeScriptWorkerOptions | undefined
 ): TypeScriptWorkerConfig {
   let configFile =

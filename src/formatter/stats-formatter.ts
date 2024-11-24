@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import type { Stats } from 'webpack';
+import type { Stats } from '@rspack/core';
 
 import type { Issue } from '../issue';
 
@@ -13,14 +13,14 @@ export function statsFormatter(issues: Issue[], stats: Stats): string {
   const warningsFormatted = warningsNumber
     ? chalk.yellow.bold(`${warningsNumber} ${warningsNumber === 1 ? 'warning' : 'warnings'}`)
     : '';
-  const timeFormatted = Math.round(Date.now() - stats.startTime);
+  const timeFormatted = stats.startTime ? Math.round(Date.now() - stats.startTime) : 0;
 
   return [
     'Found ',
     errorsFormatted,
     errorsFormatted && warningsFormatted ? ' and ' : '',
     warningsFormatted,
-    ` in ${timeFormatted} ms`,
+    timeFormatted ? ` in ${timeFormatted} ms` : '',
     '.',
   ].join('');
 }

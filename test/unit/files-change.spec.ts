@@ -1,4 +1,4 @@
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import {
   clearFilesChange,
@@ -8,13 +8,13 @@ import {
 } from '../../src/files-change';
 
 describe('files-change', () => {
-  let compiler: webpack.Compiler;
-  let otherCompiler: webpack.Compiler;
+  let compiler: rspack.Compiler;
+  let otherCompiler: rspack.Compiler;
 
   beforeEach(() => {
     // compiler is used only as a key
-    compiler = {} as unknown as webpack.Compiler;
-    otherCompiler = {} as unknown as webpack.Compiler;
+    compiler = {} as unknown as rspack.Compiler;
+    otherCompiler = {} as unknown as rspack.Compiler;
   });
 
   it('gets files change without modifying them', () => {

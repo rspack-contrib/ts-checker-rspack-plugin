@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const configuration = require('./webpack.config.js');
+const configuration = require('./rspack.config.js');
 
 const builder = webpack({ ...configuration, mode: 'development' });
 

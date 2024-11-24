@@ -1,4 +1,4 @@
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import { createIssuePredicateFromIssueMatch } from './issue-match';
 import type { IssuePredicateOption, IssueOptions } from './issue-options';
@@ -27,7 +27,7 @@ function createIssuePredicateFromOption(
 }
 
 function createIssueConfig(
-  compiler: webpack.Compiler,
+  compiler: rspack.Compiler,
   options: IssueOptions | undefined
 ): IssueConfig {
   const context = compiler.options.context || process.cwd();

@@ -1,4 +1,4 @@
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import { getInfrastructureLogger } from '../infrastructure-logger';
 import type { Issue } from '../issue';
@@ -8,7 +8,7 @@ import { getPluginHooks } from '../plugin-hooks';
 import type { TsCheckerRspackPluginState } from '../plugin-state';
 
 function tapAfterCompileToGetIssues(
-  compiler: webpack.Compiler,
+  compiler: rspack.Compiler,
   config: TsCheckerRspackPluginConfig,
   state: TsCheckerRspackPluginState
 ) {

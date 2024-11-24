@@ -1,6 +1,6 @@
 import path from 'path';
 
-import * as webpack from 'webpack';
+import * as rspack from '@rspack/core';
 
 import type { FormatterPathType } from '../formatter';
 import { forwardSlash } from '../utils/path/forward-slash';
@@ -9,13 +9,15 @@ import { relativeToContext } from '../utils/path/relative-to-context';
 import type { Issue } from './issue';
 import { formatIssueLocation } from './issue-location';
 
-class IssueWebpackError extends webpack.WebpackError {
+class IssueWebpackError extends rspack.WebpackError {
   readonly hideStack = true;
+
+  file?: string;
 
   constructor(message: string, pathType: FormatterPathType, readonly issue: Issue) {
     super(message);
 
-    // to display issue location using `loc` property, webpack requires `error.module` which
+    // to display issue location using `loc` property, Rspack requires `error.module` which
     // should be a NormalModule instance.
     // to avoid such a dependency, we do a workaround - error.file will contain formatted location instead
     if (issue.file) {

@@ -2,7 +2,7 @@ import * as path from 'path';
 
 import type { JSONSchema7 } from 'json-schema';
 import { validate } from 'schema-utils';
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import { tapAfterCompileToAddDependencies } from './hooks/tap-after-compile-to-add-dependencies';
 import { tapAfterEnvironmentToPatchWatching } from './hooks/tap-after-environment-to-patch-watching';
@@ -50,11 +50,11 @@ class TsCheckerRspackPlugin {
     validate(schema as JSONSchema7, this.options, config);
   }
 
-  public static getCompilerHooks(compiler: webpack.Compiler) {
+  public static getCompilerHooks(compiler: rspack.Compiler) {
     return getPluginHooks(compiler);
   }
 
-  apply(compiler: webpack.Compiler) {
+  apply(compiler: rspack.Compiler) {
     const config = createPluginConfig(compiler, this.options);
     const state = createPluginState();
 

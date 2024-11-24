@@ -1,4 +1,4 @@
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import { getInfrastructureLogger } from '../infrastructure-logger';
 import type { TsCheckerRspackPluginState } from '../plugin-state';
@@ -6,7 +6,7 @@ import { InclusiveNodeWatchFileSystem } from '../watch/inclusive-node-watch-file
 import type { WatchFileSystem } from '../watch/watch-file-system';
 
 function tapAfterEnvironmentToPatchWatching(
-  compiler: webpack.Compiler,
+  compiler: rspack.Compiler,
   state: TsCheckerRspackPluginState
 ) {
   const { debug } = getInfrastructureLogger(compiler);

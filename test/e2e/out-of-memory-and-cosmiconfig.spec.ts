@@ -8,14 +8,14 @@ describe('TsCheckerRspackPlugin Out Of Memory and Cosmiconfig', () => {
     async ({ async }) => {
       await sandbox.load(path.join(__dirname, 'fixtures/typescript-basic'));
       await sandbox.install('yarn', {});
-      await sandbox.patch('webpack.config.js', 'async: false,', `async: ${JSON.stringify(async)},`);
+      await sandbox.patch('rspack.config.js', 'async: false,', `async: ${JSON.stringify(async)},`);
 
       await sandbox.write(
         'fork-ts-checker.config.js',
         `module.exports = { typescript: { memoryLimit: 10 } };`
       );
 
-      const driver = createProcessDriver(sandbox.spawn('yarn webpack serve --mode=development'));
+      const driver = createProcessDriver(sandbox.spawn('yarn rspack serve --mode=development'));
 
       // we should see an error message about out of memory
       await driver.waitForStderrIncludes(

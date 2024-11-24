@@ -1,11 +1,11 @@
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import { getInfrastructureLogger } from '../infrastructure-logger';
 import type { TsCheckerRspackPluginState } from '../plugin-state';
 import type { RpcWorker } from '../rpc';
 
 function tapStopToTerminateWorkers(
-  compiler: webpack.Compiler,
+  compiler: rspack.Compiler,
   getIssuesWorker: RpcWorker,
   getDependenciesWorker: RpcWorker,
   state: TsCheckerRspackPluginState

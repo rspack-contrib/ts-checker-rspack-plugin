@@ -13,7 +13,7 @@ describe('TypeScript Context Option', () => {
     await sandbox.load(path.join(__dirname, 'fixtures/typescript-basic'));
     await sandbox.install('yarn', { typescript });
     await sandbox.patch(
-      'webpack.config.js',
+      'rspack.config.js',
       '      async: false,',
       [
         `      async: ${JSON.stringify(async)},`,
@@ -47,12 +47,12 @@ describe('TypeScript Context Option', () => {
       })
     );
     await sandbox.patch(
-      'webpack.config.js',
+      'rspack.config.js',
       "entry: './src/index.ts',",
       ["entry: './src/index.ts',", 'context: path.resolve(__dirname),'].join('\n')
     );
     await sandbox.patch(
-      'webpack.config.js',
+      'rspack.config.js',
       '          transpileOnly: true,',
       [
         '          transpileOnly: true,',
@@ -67,7 +67,7 @@ describe('TypeScript Context Option', () => {
       sandbox.spawn(
         `../node_modules/.bin/webpack${
           os.platform() === 'win32' ? '.cmd' : ''
-        } serve --mode=development --config=../webpack.config.js`,
+        } serve --mode=development --config=../rspack.config.js`,
         {
           cwd: path.join(sandbox.context, 'foo'),
         }

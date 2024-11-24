@@ -1,4 +1,4 @@
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 export interface InfrastructureLogger {
   log(...args: unknown[]): void;
@@ -8,7 +8,7 @@ export interface InfrastructureLogger {
   info(...args: unknown[]): void;
 }
 
-export function getInfrastructureLogger(compiler: webpack.Compiler): InfrastructureLogger {
+export function getInfrastructureLogger(compiler: rspack.Compiler): InfrastructureLogger {
   const logger = compiler.getInfrastructureLogger('TsCheckerRspackPlugin');
 
   return {

@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import { statsFormatter } from '../formatter/stats-formatter';
 import { createWebpackFormatter } from '../formatter/webpack-formatter';
@@ -13,7 +13,7 @@ import { isPending } from '../utils/async/is-pending';
 import { wait } from '../utils/async/wait';
 
 function tapDoneToAsyncGetIssues(
-  compiler: webpack.Compiler,
+  compiler: rspack.Compiler,
   config: TsCheckerRspackPluginConfig,
   state: TsCheckerRspackPluginState
 ) {

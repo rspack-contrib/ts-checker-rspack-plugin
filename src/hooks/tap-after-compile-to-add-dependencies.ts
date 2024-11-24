@@ -1,11 +1,11 @@
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import { getInfrastructureLogger } from '../infrastructure-logger';
 import type { TsCheckerRspackPluginConfig } from '../plugin-config';
 import type { TsCheckerRspackPluginState } from '../plugin-state';
 
 function tapAfterCompileToAddDependencies(
-  compiler: webpack.Compiler,
+  compiler: rspack.Compiler,
   config: TsCheckerRspackPluginConfig,
   state: TsCheckerRspackPluginState
 ) {

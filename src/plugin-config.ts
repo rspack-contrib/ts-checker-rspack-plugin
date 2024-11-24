@@ -1,4 +1,4 @@
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import type { FormatterConfig } from './formatter';
 import { createFormatterConfig } from './formatter';
@@ -20,7 +20,7 @@ interface TsCheckerRspackPluginConfig {
 }
 
 function createPluginConfig(
-  compiler: webpack.Compiler,
+  compiler: rspack.Compiler,
   options: TsCheckerRspackPluginOptions = {}
 ): TsCheckerRspackPluginConfig {
   return {

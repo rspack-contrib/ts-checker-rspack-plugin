@@ -161,7 +161,7 @@ This plugin provides some custom Rspack hooks:
 | `issues`   | `SyncWaterfallHook`        | `issues, compilation` | Issues have been received and will be reported. It's a waterfall hook, so you can modify the list of received issues.                                              |
 
 To access plugin hooks and tap into the event, we need to use the `getCompilerHooks` static method.
-When we call this method with a [webpack compiler instance](https://webpack.js.org/api/node/), it returns the object with
+When we call this method with a [Rspack compiler instance](https://rspack.dev/api/javascript-api/compiler), it returns the object with
 [tapable](https://github.com/webpack/tapable) hooks where you can pass in your callbacks.
 
 ```js

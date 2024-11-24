@@ -1,4 +1,4 @@
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 interface FilesChange {
   changedFiles?: string[];
@@ -13,9 +13,9 @@ const isIgnoredFile = (file: string) =>
     (ignoredFile) => file.endsWith(`/${ignoredFile}`) || file.endsWith(`\\${ignoredFile}`)
   );
 
-const compilerFilesChangeMap = new WeakMap<webpack.Compiler, FilesChange>();
+const compilerFilesChangeMap = new WeakMap<rspack.Compiler, FilesChange>();
 
-function getFilesChange(compiler: webpack.Compiler): FilesChange {
+function getFilesChange(compiler: rspack.Compiler): FilesChange {
   const { changedFiles = [], deletedFiles = [] } = compilerFilesChangeMap.get(compiler) || {
     changedFiles: [],
     deletedFiles: [],
@@ -27,17 +27,17 @@ function getFilesChange(compiler: webpack.Compiler): FilesChange {
   };
 }
 
-function consumeFilesChange(compiler: webpack.Compiler): FilesChange {
+function consumeFilesChange(compiler: rspack.Compiler): FilesChange {
   const change = getFilesChange(compiler);
   clearFilesChange(compiler);
   return change;
 }
 
-function updateFilesChange(compiler: webpack.Compiler, change: FilesChange): void {
+function updateFilesChange(compiler: rspack.Compiler, change: FilesChange): void {
   compilerFilesChangeMap.set(compiler, aggregateFilesChanges([getFilesChange(compiler), change]));
 }
 
-function clearFilesChange(compiler: webpack.Compiler): void {
+function clearFilesChange(compiler: rspack.Compiler): void {
   compilerFilesChangeMap.delete(compiler);
 }
 

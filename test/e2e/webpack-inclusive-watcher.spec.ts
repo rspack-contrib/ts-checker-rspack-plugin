@@ -11,7 +11,7 @@ describe('Webpack Inclusive Watcher', () => {
       await sandbox.load(path.join(__dirname, 'fixtures/typescript-basic'));
       await sandbox.load(path.join(__dirname, 'fixtures/typescript-package'));
       await sandbox.install('yarn', { typescript: '4.6.3' });
-      await sandbox.patch('webpack.config.js', 'async: false,', `async: ${JSON.stringify(async)},`);
+      await sandbox.patch('rspack.config.js', 'async: false,', `async: ${JSON.stringify(async)},`);
 
       // add import to typescript-nested-project project
       await sandbox.patch(
@@ -26,7 +26,7 @@ describe('Webpack Inclusive Watcher', () => {
       );
 
       // start webpack dev server
-      const process = sandbox.spawn('yarn webpack serve --mode=development');
+      const process = sandbox.spawn('yarn rspack serve --mode=development');
       const baseDriver = createProcessDriver(process);
       const webpackDriver = createWebpackDevServerDriver(process, async);
 

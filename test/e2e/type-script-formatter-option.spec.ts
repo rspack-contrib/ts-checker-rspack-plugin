@@ -12,7 +12,7 @@ describe('TypeScript Formatter Option', () => {
       await sandbox.load(path.join(__dirname, 'fixtures/typescript-basic'));
       await sandbox.install('yarn', { typescript });
       await sandbox.patch(
-        'webpack.config.js',
+        'rspack.config.js',
         '      async: false,',
         [
           `      async: ${JSON.stringify(async)},`,
@@ -23,7 +23,7 @@ describe('TypeScript Formatter Option', () => {
       );
 
       const driver = createWebpackDevServerDriver(
-        sandbox.spawn('yarn webpack serve --mode=development'),
+        sandbox.spawn('yarn rspack serve --mode=development'),
         async
       );
 

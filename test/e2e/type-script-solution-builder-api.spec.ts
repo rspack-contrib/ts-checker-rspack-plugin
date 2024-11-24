@@ -13,11 +13,11 @@ describe('TypeScript SolutionBuilder API', () => {
   ])('reports semantic error for %p', async ({ async, typescript, mode }) => {
     await sandbox.load(path.join(__dirname, 'fixtures/typescript-monorepo'));
     await sandbox.install('yarn', { typescript });
-    await sandbox.patch('webpack.config.js', 'async: false,', `async: ${JSON.stringify(async)},`);
-    await sandbox.patch('webpack.config.js', "mode: 'readonly',", `mode: ${JSON.stringify(mode)},`);
+    await sandbox.patch('rspack.config.js', 'async: false,', `async: ${JSON.stringify(async)},`);
+    await sandbox.patch('rspack.config.js', "mode: 'readonly',", `mode: ${JSON.stringify(mode)},`);
 
     const driver = createWebpackDevServerDriver(
-      sandbox.spawn('yarn webpack serve --mode=development'),
+      sandbox.spawn('yarn rspack serve --mode=development'),
       async
     );
     let errors: string[];

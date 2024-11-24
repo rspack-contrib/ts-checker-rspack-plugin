@@ -1,24 +1,24 @@
 import { SyncHook, SyncWaterfallHook, AsyncSeriesWaterfallHook } from 'tapable';
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import type { FilesChange } from './files-change';
 import type { Issue } from './issue';
 
 const compilerHookMap = new WeakMap<
-  webpack.Compiler | webpack.MultiCompiler,
+  rspack.Compiler | rspack.MultiCompiler,
   TsCheckerRspackPluginHooks
 >();
 
 function createPluginHooks() {
   return {
-    start: new AsyncSeriesWaterfallHook<[FilesChange, webpack.Compilation]>([
+    start: new AsyncSeriesWaterfallHook<[FilesChange, rspack.Compilation]>([
       'change',
       'compilation',
     ]),
-    waiting: new SyncHook<[webpack.Compilation]>(['compilation']),
-    canceled: new SyncHook<[webpack.Compilation]>(['compilation']),
-    error: new SyncHook<[unknown, webpack.Compilation]>(['error', 'compilation']),
-    issues: new SyncWaterfallHook<[Issue[], webpack.Compilation | undefined], void>([
+    waiting: new SyncHook<[rspack.Compilation]>(['compilation']),
+    canceled: new SyncHook<[rspack.Compilation]>(['compilation']),
+    error: new SyncHook<[unknown, rspack.Compilation]>(['error', 'compilation']),
+    issues: new SyncWaterfallHook<[Issue[], rspack.Compilation | undefined], void>([
       'issues',
       'compilation',
     ]),
@@ -38,7 +38,7 @@ function forwardPluginHooks(
   source.issues.tap('TsCheckerRspackPlugin', target.issues.call);
 }
 
-function getPluginHooks(compiler: webpack.Compiler | webpack.MultiCompiler) {
+function getPluginHooks(compiler: rspack.Compiler | rspack.MultiCompiler) {
   let hooks = compilerHookMap.get(compiler);
   if (hooks === undefined) {
     hooks = createPluginHooks();

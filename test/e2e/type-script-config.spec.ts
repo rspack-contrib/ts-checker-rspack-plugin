@@ -14,10 +14,10 @@ describe('TypeScript Config', () => {
     async ({ async, ...dependencies }) => {
       await sandbox.load(path.join(__dirname, 'fixtures/typescript-basic'));
       await sandbox.install('yarn', { ...dependencies });
-      await sandbox.patch('webpack.config.js', 'async: false,', `async: ${JSON.stringify(async)},`);
+      await sandbox.patch('rspack.config.js', 'async: false,', `async: ${JSON.stringify(async)},`);
 
       const driver = createWebpackDevServerDriver(
-        sandbox.spawn('yarn webpack serve --mode=development'),
+        sandbox.spawn('yarn rspack serve --mode=development'),
         async
       );
 
@@ -55,7 +55,7 @@ describe('TypeScript Config', () => {
     );
 
     driver = createWebpackDevServerDriver(
-      sandbox.spawn('yarn webpack serve --mode=development'),
+      sandbox.spawn('yarn rspack serve --mode=development'),
       false
     );
     errors = await driver.waitForErrors();
@@ -68,7 +68,7 @@ describe('TypeScript Config', () => {
     );
 
     driver = createWebpackDevServerDriver(
-      sandbox.spawn('yarn webpack serve --mode=development'),
+      sandbox.spawn('yarn rspack serve --mode=development'),
       false
     );
     errors = await driver.waitForErrors();

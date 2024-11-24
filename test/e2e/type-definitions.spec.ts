@@ -6,10 +6,10 @@ describe('Type Definitions', () => {
     await sandbox.install('yarn', {});
 
     expect(await sandbox.exec('yarn tsc', { fail: true })).toContain(
-      "webpack.config.ts(7,7): error TS2322: Type 'string' is not assignable to type 'boolean | undefined'."
+      "rspack.config.ts(7,7): error TS2322: Type 'string' is not assignable to type 'boolean | undefined'."
     );
 
-    await sandbox.patch('webpack.config.ts', "async: 'invalid_value'", 'async: true');
+    await sandbox.patch('rspack.config.ts', "async: 'invalid_value'", 'async: true');
 
     expect(await sandbox.exec('yarn tsc')).not.toContain('error TS');
   });

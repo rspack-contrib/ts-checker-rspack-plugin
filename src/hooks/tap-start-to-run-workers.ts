@@ -1,5 +1,5 @@
 import { AbortController } from 'node-abort-controller';
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 import type { FilesChange } from '../files-change';
 import { aggregateFilesChanges, consumeFilesChange } from '../files-change';
@@ -17,7 +17,7 @@ import { tapAfterCompileToGetIssues } from './tap-after-compile-to-get-issues';
 import { tapDoneToAsyncGetIssues } from './tap-done-to-async-get-issues';
 
 function tapStartToRunWorkers(
-  compiler: webpack.Compiler,
+  compiler: rspack.Compiler,
   getIssuesWorker: RpcWorker<GetIssuesWorker>,
   getDependenciesWorker: RpcWorker<GetDependenciesWorker>,
   config: TsCheckerRspackPluginConfig,

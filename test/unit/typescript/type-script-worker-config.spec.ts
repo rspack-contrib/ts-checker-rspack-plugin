@@ -2,10 +2,10 @@ import path from 'path';
 
 import type { TypeScriptWorkerConfig } from 'src/typescript/type-script-worker-config';
 import type { TypeScriptWorkerOptions } from 'src/typescript/type-script-worker-options';
-import type * as webpack from 'webpack';
+import type * as rspack from '@rspack/core';
 
 describe('typescript/type-scripts-worker-config', () => {
-  let compiler: webpack.Compiler;
+  let compiler: rspack.Compiler;
   const context = '/webpack/context';
 
   const configuration: TypeScriptWorkerConfig = {
@@ -31,7 +31,7 @@ describe('typescript/type-scripts-worker-config', () => {
       options: {
         context,
       },
-    } as webpack.Compiler;
+    } as rspack.Compiler;
   });
   afterEach(() => {
     jest.resetModules();

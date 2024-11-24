@@ -1,9 +1,9 @@
-import { extname, relative, isAbsolute } from 'path';
+import { extname} from 'path';
 
 import type { FSWatcher } from 'chokidar';
 import chokidar from 'chokidar';
 import minimatch from 'minimatch';
-import type { Compiler } from 'webpack';
+import type { Compiler } from '@rspack/core';
 
 import { clearFilesChange, updateFilesChange } from '../files-change';
 import { getInfrastructureLogger } from '../infrastructure-logger';
