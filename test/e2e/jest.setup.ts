@@ -14,13 +14,13 @@ declare global {
 }
 
 beforeAll(async () => {
-  const forkTsCheckerWebpackPluginTar = await packLocalPackage(path.resolve(__dirname, '../../'));
+  const TsCheckerRspackPluginTar = await packLocalPackage(path.resolve(__dirname, '../../'));
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   global.sandbox = await createSandbox({
     lockDirectory: path.resolve(__dirname, '__locks__'),
     fixedDependencies: {
-      'fork-ts-checker-webpack-plugin': `file:${forkTsCheckerWebpackPluginTar}`,
+      'fork-ts-checker-webpack-plugin': `file:${TsCheckerRspackPluginTar}`,
     },
   });
 });

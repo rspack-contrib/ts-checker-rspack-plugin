@@ -5,7 +5,7 @@ import type { FilesChange } from './files-change';
 import type { FilesMatch } from './files-match';
 import type { Issue } from './issue';
 
-interface ForkTsCheckerWebpackPluginState {
+interface TsCheckerRspackPluginState {
   issuesPromise: Promise<Issue[] | undefined>;
   dependenciesPromise: Promise<FilesMatch | undefined>;
   abortController: AbortController | undefined;
@@ -17,7 +17,7 @@ interface ForkTsCheckerWebpackPluginState {
   webpackDevServerDoneTap: FullTap | undefined;
 }
 
-function createPluginState(): ForkTsCheckerWebpackPluginState {
+function createPluginState(): TsCheckerRspackPluginState {
   return {
     issuesPromise: Promise.resolve(undefined),
     dependenciesPromise: Promise.resolve(undefined),
@@ -31,4 +31,4 @@ function createPluginState(): ForkTsCheckerWebpackPluginState {
   };
 }
 
-export { ForkTsCheckerWebpackPluginState, createPluginState };
+export { TsCheckerRspackPluginState, createPluginState };

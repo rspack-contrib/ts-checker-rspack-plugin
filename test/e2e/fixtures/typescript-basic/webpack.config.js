@@ -1,5 +1,5 @@
 const path = require('path');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const TsCheckerRspackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -23,12 +23,12 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin({
+    new TsCheckerRspackPlugin({
       async: false,
     }),
   ],
   infrastructureLogging: {
     level: 'log',
-    debug: /ForkTsCheckerWebpackPlugin/,
+    debug: /TsCheckerRspackPlugin/,
   },
 };

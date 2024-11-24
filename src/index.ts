@@ -1,3 +1,3 @@
-import { ForkTsCheckerWebpackPlugin } from './plugin';
+import { TsCheckerRspackPlugin } from './plugin';
 
-export = ForkTsCheckerWebpackPlugin;
+export = TsCheckerRspackPlugin;

@@ -5,7 +5,7 @@ Very similar to the [ts-loader example](../ts-loader), the main difference in th
 enable **syntactic diagnostics**:
 
 ```js
-new ForkTsCheckerWebpackPlugin({
+new TsCheckerRspackPlugin({
   typescript: {
     diagnosticOptions: {
       semantic: true,

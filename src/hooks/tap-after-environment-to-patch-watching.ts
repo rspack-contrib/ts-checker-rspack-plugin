@@ -1,17 +1,17 @@
 import type * as webpack from 'webpack';
 
 import { getInfrastructureLogger } from '../infrastructure-logger';
-import type { ForkTsCheckerWebpackPluginState } from '../plugin-state';
+import type { TsCheckerRspackPluginState } from '../plugin-state';
 import { InclusiveNodeWatchFileSystem } from '../watch/inclusive-node-watch-file-system';
 import type { WatchFileSystem } from '../watch/watch-file-system';
 
 function tapAfterEnvironmentToPatchWatching(
   compiler: webpack.Compiler,
-  state: ForkTsCheckerWebpackPluginState
+  state: TsCheckerRspackPluginState
 ) {
   const { debug } = getInfrastructureLogger(compiler);
 
-  compiler.hooks.afterEnvironment.tap('ForkTsCheckerWebpackPlugin', () => {
+  compiler.hooks.afterEnvironment.tap('TsCheckerRspackPlugin', () => {
     const watchFileSystem = compiler.watchFileSystem;
     if (watchFileSystem) {
       debug("Overwriting webpack's watch file system.");

@@ -1,13 +1,13 @@
 import type * as webpack from 'webpack';
 
 import { getInfrastructureLogger } from '../infrastructure-logger';
-import type { ForkTsCheckerWebpackPluginConfig } from '../plugin-config';
-import type { ForkTsCheckerWebpackPluginState } from '../plugin-state';
+import type { TsCheckerRspackPluginConfig } from '../plugin-config';
+import type { TsCheckerRspackPluginState } from '../plugin-state';
 
 function interceptDoneToGetDevServerTap(
   compiler: webpack.Compiler,
-  config: ForkTsCheckerWebpackPluginConfig,
-  state: ForkTsCheckerWebpackPluginState
+  config: TsCheckerRspackPluginConfig,
+  state: TsCheckerRspackPluginState
 ) {
   const { debug } = getInfrastructureLogger(compiler);
 

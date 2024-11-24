@@ -4,10 +4,10 @@ import type * as webpack from 'webpack';
 import type { FilesChange } from '../files-change';
 import { aggregateFilesChanges, consumeFilesChange } from '../files-change';
 import { getInfrastructureLogger } from '../infrastructure-logger';
-import type { ForkTsCheckerWebpackPluginConfig } from '../plugin-config';
+import type { TsCheckerRspackPluginConfig } from '../plugin-config';
 import { getPluginHooks } from '../plugin-hooks';
 import { dependenciesPool, issuesPool } from '../plugin-pools';
-import type { ForkTsCheckerWebpackPluginState } from '../plugin-state';
+import type { TsCheckerRspackPluginState } from '../plugin-state';
 import type { RpcWorker } from '../rpc';
 import type { GetDependenciesWorker } from '../typescript/worker/get-dependencies-worker';
 import type { GetIssuesWorker } from '../typescript/worker/get-issues-worker';
@@ -20,13 +20,13 @@ function tapStartToRunWorkers(
   compiler: webpack.Compiler,
   getIssuesWorker: RpcWorker<GetIssuesWorker>,
   getDependenciesWorker: RpcWorker<GetDependenciesWorker>,
-  config: ForkTsCheckerWebpackPluginConfig,
-  state: ForkTsCheckerWebpackPluginState
+  config: TsCheckerRspackPluginConfig,
+  state: TsCheckerRspackPluginState
 ) {
   const hooks = getPluginHooks(compiler);
   const { log, debug } = getInfrastructureLogger(compiler);
 
-  compiler.hooks.run.tap('ForkTsCheckerWebpackPlugin', () => {
+  compiler.hooks.run.tap('TsCheckerRspackPlugin', () => {
     if (!state.initialized) {
       debug('Initializing plugin for single run (not async).');
       state.initialized = true;
@@ -36,7 +36,7 @@ function tapStartToRunWorkers(
     }
   });
 
-  compiler.hooks.watchRun.tap('ForkTsCheckerWebpackPlugin', async () => {
+  compiler.hooks.watchRun.tap('TsCheckerRspackPlugin', async () => {
     if (!state.initialized) {
       state.initialized = true;
 
@@ -54,7 +54,7 @@ function tapStartToRunWorkers(
     }
   });
 
-  compiler.hooks.compilation.tap('ForkTsCheckerWebpackPlugin', async (compilation) => {
+  compiler.hooks.compilation.tap('TsCheckerRspackPlugin', async (compilation) => {
     if (compilation.compiler !== compiler) {
       // run only for the compiler that the plugin was registered for
       return;

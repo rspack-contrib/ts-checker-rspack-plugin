@@ -7,7 +7,7 @@ import type { Compiler } from 'webpack';
 
 import { clearFilesChange, updateFilesChange } from '../files-change';
 import { getInfrastructureLogger } from '../infrastructure-logger';
-import type { ForkTsCheckerWebpackPluginState } from '../plugin-state';
+import type { TsCheckerRspackPluginState } from '../plugin-state';
 import { isInsideAnotherPath } from '../utils/path/is-inside-another-path';
 
 import type { WatchFileSystem } from './watch-file-system';
@@ -56,7 +56,7 @@ class InclusiveNodeWatchFileSystem implements WatchFileSystem {
   constructor(
     private watchFileSystem: WatchFileSystem,
     private compiler: Compiler,
-    private pluginState: ForkTsCheckerWebpackPluginState
+    private pluginState: TsCheckerRspackPluginState
   ) {
     this.dirsWatchers = new Map();
     this.deletedFiles = new Set();

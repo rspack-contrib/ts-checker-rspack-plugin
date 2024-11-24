@@ -13,7 +13,7 @@ import { tapStartToRunWorkers } from './hooks/tap-start-to-run-workers';
 import { tapStopToTerminateWorkers } from './hooks/tap-stop-to-terminate-workers';
 import { createPluginConfig } from './plugin-config';
 import { getPluginHooks } from './plugin-hooks';
-import type { ForkTsCheckerWebpackPluginOptions } from './plugin-options';
+import type { TsCheckerRspackPluginOptions } from './plugin-options';
 import schema from './plugin-options.json';
 import { dependenciesPool, issuesPool } from './plugin-pools';
 import { createPluginState } from './plugin-state';
@@ -22,7 +22,7 @@ import { assertTypeScriptSupport } from './typescript/type-script-support';
 import type { GetDependenciesWorker } from './typescript/worker/get-dependencies-worker';
 import type { GetIssuesWorker } from './typescript/worker/get-issues-worker';
 
-class ForkTsCheckerWebpackPlugin {
+class TsCheckerRspackPlugin {
   /**
    * Current version of the plugin
    * TODO: use `define` to replace it
@@ -35,18 +35,18 @@ class ForkTsCheckerWebpackPlugin {
   static readonly dependenciesPool = dependenciesPool;
 
   /**
-   * @deprecated Use ForkTsCheckerWebpackPlugin.issuesPool instead
+   * @deprecated Use TsCheckerRspackPlugin.issuesPool instead
    */
   static readonly pool = issuesPool;
 
-  private readonly options: ForkTsCheckerWebpackPluginOptions;
+  private readonly options: TsCheckerRspackPluginOptions;
 
-  constructor(options: ForkTsCheckerWebpackPluginOptions = {}) {
+  constructor(options: TsCheckerRspackPluginOptions = {}) {
     const explorerSync = cosmiconfigSync('fork-ts-checker');
     const { config: externalOptions } = explorerSync.search() || {};
 
     // first validate options directly passed to the constructor
-    const config = { name: 'ForkTsCheckerWebpackPlugin' };
+    const config = { name: 'TsCheckerRspackPlugin' };
     validate(schema as JSONSchema7, options, config);
 
     this.options = merge(externalOptions || {}, options || {});
@@ -82,4 +82,4 @@ class ForkTsCheckerWebpackPlugin {
   }
 }
 
-export { ForkTsCheckerWebpackPlugin };
+export { TsCheckerRspackPlugin };

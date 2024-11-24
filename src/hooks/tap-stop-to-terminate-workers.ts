@@ -1,14 +1,14 @@
 import type * as webpack from 'webpack';
 
 import { getInfrastructureLogger } from '../infrastructure-logger';
-import type { ForkTsCheckerWebpackPluginState } from '../plugin-state';
+import type { TsCheckerRspackPluginState } from '../plugin-state';
 import type { RpcWorker } from '../rpc';
 
 function tapStopToTerminateWorkers(
   compiler: webpack.Compiler,
   getIssuesWorker: RpcWorker,
   getDependenciesWorker: RpcWorker,
-  state: ForkTsCheckerWebpackPluginState
+  state: TsCheckerRspackPluginState
 ) {
   const { debug } = getInfrastructureLogger(compiler);
 
@@ -18,17 +18,17 @@ function tapStopToTerminateWorkers(
     getDependenciesWorker.terminate();
   };
 
-  compiler.hooks.watchClose.tap('ForkTsCheckerWebpackPlugin', () => {
+  compiler.hooks.watchClose.tap('TsCheckerRspackPlugin', () => {
     terminateWorkers();
   });
 
-  compiler.hooks.done.tap('ForkTsCheckerWebpackPlugin', () => {
+  compiler.hooks.done.tap('TsCheckerRspackPlugin', () => {
     if (!state.watching) {
       terminateWorkers();
     }
   });
 
-  compiler.hooks.failed.tap('ForkTsCheckerWebpackPlugin', () => {
+  compiler.hooks.failed.tap('TsCheckerRspackPlugin', () => {
     if (!state.watching) {
       terminateWorkers();
     }

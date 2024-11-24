@@ -2,7 +2,7 @@ import path from 'path';
 
 import { createProcessDriver } from 'karton';
 
-describe('ForkTsCheckerWebpackPlugin Out Of Memory and Cosmiconfig', () => {
+describe('TsCheckerRspackPlugin Out Of Memory and Cosmiconfig', () => {
   it.each([{ async: false }, { async: true }])(
     'handles out of memory for %p',
     async ({ async }) => {
@@ -19,7 +19,7 @@ describe('ForkTsCheckerWebpackPlugin Out Of Memory and Cosmiconfig', () => {
 
       // we should see an error message about out of memory
       await driver.waitForStderrIncludes(
-        'Issues checking service aborted - probably out of memory. Check the `memoryLimit` option in the ForkTsCheckerWebpackPlugin configuration.\n' +
+        'Issues checking service aborted - probably out of memory. Check the `memoryLimit` option in the TsCheckerRspackPlugin configuration.\n' +
           "If increasing the memory doesn't solve the issue, it's most probably a bug in the TypeScript."
       );
 
@@ -32,7 +32,7 @@ describe('ForkTsCheckerWebpackPlugin Out Of Memory and Cosmiconfig', () => {
 
       // we should see an error message about out of memory again
       await driver.waitForStderrIncludes(
-        'Issues checking service aborted - probably out of memory. Check the `memoryLimit` option in the ForkTsCheckerWebpackPlugin configuration.\n' +
+        'Issues checking service aborted - probably out of memory. Check the `memoryLimit` option in the TsCheckerRspackPlugin configuration.\n' +
           "If increasing the memory doesn't solve the issue, it's most probably a bug in the TypeScript."
       );
     }

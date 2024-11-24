@@ -14,8 +14,8 @@ describe('Webpack Production Build', () => {
       // lets remove the async option at all as the plugin should now how to set it by default
       await sandbox.patch(
         'webpack.config.js',
-        ['    new ForkTsCheckerWebpackPlugin({', '      async: false,', '    }),'].join('\n'),
-        ['    new ForkTsCheckerWebpackPlugin(),'].join('\n')
+        ['    new TsCheckerRspackPlugin({', '      async: false,', '    }),'].join('\n'),
+        ['    new TsCheckerRspackPlugin(),'].join('\n')
       );
 
       const result = await sandbox.exec('yarn webpack --mode=production');
@@ -70,8 +70,8 @@ describe('Webpack Production Build', () => {
       // remove the async option at all as the plugin should now how to set it by default
       await sandbox.patch(
         'webpack.config.js',
-        ['    new ForkTsCheckerWebpackPlugin({', '      async: false,', '    }),'].join('\n'),
-        ['    new ForkTsCheckerWebpackPlugin(),'].join('\n')
+        ['    new TsCheckerRspackPlugin({', '      async: false,', '    }),'].join('\n'),
+        ['    new TsCheckerRspackPlugin(),'].join('\n')
       );
 
       // introduce an error in the project

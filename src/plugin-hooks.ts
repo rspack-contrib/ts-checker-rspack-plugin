@@ -6,7 +6,7 @@ import type { Issue } from './issue';
 
 const compilerHookMap = new WeakMap<
   webpack.Compiler | webpack.MultiCompiler,
-  ForkTsCheckerWebpackPluginHooks
+  TsCheckerRspackPluginHooks
 >();
 
 function createPluginHooks() {
@@ -25,17 +25,17 @@ function createPluginHooks() {
   };
 }
 
-type ForkTsCheckerWebpackPluginHooks = ReturnType<typeof createPluginHooks>;
+type TsCheckerRspackPluginHooks = ReturnType<typeof createPluginHooks>;
 
 function forwardPluginHooks(
-  source: ForkTsCheckerWebpackPluginHooks,
-  target: ForkTsCheckerWebpackPluginHooks
+  source: TsCheckerRspackPluginHooks,
+  target: TsCheckerRspackPluginHooks
 ) {
-  source.start.tapPromise('ForkTsCheckerWebpackPlugin', target.start.promise);
-  source.waiting.tap('ForkTsCheckerWebpackPlugin', target.waiting.call);
-  source.canceled.tap('ForkTsCheckerWebpackPlugin', target.canceled.call);
-  source.error.tap('ForkTsCheckerWebpackPlugin', target.error.call);
-  source.issues.tap('ForkTsCheckerWebpackPlugin', target.issues.call);
+  source.start.tapPromise('TsCheckerRspackPlugin', target.start.promise);
+  source.waiting.tap('TsCheckerRspackPlugin', target.waiting.call);
+  source.canceled.tap('TsCheckerRspackPlugin', target.canceled.call);
+  source.error.tap('TsCheckerRspackPlugin', target.error.call);
+  source.issues.tap('TsCheckerRspackPlugin', target.issues.call);
 }
 
 function getPluginHooks(compiler: webpack.Compiler | webpack.MultiCompiler) {
@@ -58,4 +58,4 @@ function getPluginHooks(compiler: webpack.Compiler | webpack.MultiCompiler) {
   return hooks;
 }
 
-export { getPluginHooks, ForkTsCheckerWebpackPluginHooks };
+export { getPluginHooks, TsCheckerRspackPluginHooks };

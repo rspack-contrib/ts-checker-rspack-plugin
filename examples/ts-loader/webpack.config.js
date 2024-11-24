@@ -1,4 +1,4 @@
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const TsCheckerRspackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -14,5 +14,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [new ForkTsCheckerWebpackPlugin()],
+  plugins: [new TsCheckerRspackPlugin()],
 };

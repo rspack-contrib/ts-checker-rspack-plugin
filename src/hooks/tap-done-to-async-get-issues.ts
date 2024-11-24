@@ -6,21 +6,21 @@ import { createWebpackFormatter } from '../formatter/webpack-formatter';
 import { getInfrastructureLogger } from '../infrastructure-logger';
 import type { Issue } from '../issue';
 import { IssueWebpackError } from '../issue/issue-webpack-error';
-import type { ForkTsCheckerWebpackPluginConfig } from '../plugin-config';
+import type { TsCheckerRspackPluginConfig } from '../plugin-config';
 import { getPluginHooks } from '../plugin-hooks';
-import type { ForkTsCheckerWebpackPluginState } from '../plugin-state';
+import type { TsCheckerRspackPluginState } from '../plugin-state';
 import { isPending } from '../utils/async/is-pending';
 import { wait } from '../utils/async/wait';
 
 function tapDoneToAsyncGetIssues(
   compiler: webpack.Compiler,
-  config: ForkTsCheckerWebpackPluginConfig,
-  state: ForkTsCheckerWebpackPluginState
+  config: TsCheckerRspackPluginConfig,
+  state: TsCheckerRspackPluginState
 ) {
   const hooks = getPluginHooks(compiler);
   const { debug } = getInfrastructureLogger(compiler);
 
-  compiler.hooks.done.tap('ForkTsCheckerWebpackPlugin', async (stats) => {
+  compiler.hooks.done.tap('TsCheckerRspackPlugin', async (stats) => {
     if (stats.compilation.compiler !== compiler) {
       // run only for the compiler that the plugin was registered for
       return;
