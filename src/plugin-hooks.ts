@@ -1,4 +1,4 @@
-import { SyncHook, SyncWaterfallHook, AsyncSeriesWaterfallHook } from 'tapable';
+import { SyncHook, SyncWaterfallHook, AsyncSeriesWaterfallHook } from '@rspack/lite-tapable';
 import type * as rspack from '@rspack/core';
 
 import type { FilesChange } from './files-change';

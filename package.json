@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@babel/code-frame": "^7.16.7",
+    "@rspack/lite-tapable": "^1.0.0",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "fs-extra": "^10.0.0",
@@ -39,8 +40,7 @@
     "minimatch": "^3.0.4",
     "node-abort-controller": "^3.0.1",
     "schema-utils": "^3.1.1",
-    "semver": "^7.3.5",
-    "tapable": "^2.2.1"
+    "semver": "^7.3.5"
   },
   "peerDependencies": {
     "@rspack/core": "^1.0.0",

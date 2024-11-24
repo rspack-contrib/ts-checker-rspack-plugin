@@ -1,5 +1,4 @@
 import type { AbortController } from 'node-abort-controller';
-import type { FullTap } from 'tapable';
 
 import type { FilesChange } from './files-change';
 import type { FilesMatch } from './files-match';
@@ -14,7 +13,7 @@ interface TsCheckerRspackPluginState {
   watching: boolean;
   initialized: boolean;
   iteration: number;
-  webpackDevServerDoneTap: FullTap | undefined;
+  webpackDevServerDoneTap: any | undefined;
 }
 
 function createPluginState(): TsCheckerRspackPluginState {

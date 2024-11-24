@@ -11,6 +11,9 @@ importers:
       '@babel/code-frame':
         specifier: ^7.16.7
         version: 7.26.2
+      '@rspack/lite-tapable':
+        specifier: ^1.0.0
+        version: 1.0.1
       chalk:
         specifier: ^4.1.2
         version: 4.1.2
@@ -35,9 +38,6 @@ importers:
       semver:
         specifier: ^7.3.5
         version: 7.6.3
-      tapable:
-        specifier: ^2.2.1
-        version: 2.2.1
     devDependencies:
       '@jest/console':
         specifier: ^27.0.0
