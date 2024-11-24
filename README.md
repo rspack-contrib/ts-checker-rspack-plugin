@@ -1,19 +1,16 @@
-[![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
-<div align="center">
+# TS Checker Rspack Plugin
 
-<img alt="" width="300" src="./media/logo.svg" />
-<h1>Fork TS Checker Webpack Plugin</h1>
-<p>Webpack plugin that runs TypeScript type checker on a separate process.</p>
+Rspack plugin that runs TypeScript type checker on a separate process.
 
-[![npm version](https://img.shields.io/npm/v/fork-ts-checker-webpack-plugin.svg)](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin)
-[![build status](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/workflows/CI/CD/badge.svg?branch=main&event=push)](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/actions?query=branch%3Amain+event%3Apush)
-[![downloads](http://img.shields.io/npm/dm/fork-ts-checker-webpack-plugin.svg)](https://npmjs.org/package/fork-ts-checker-webpack-plugin)
-[![commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![npm version](https://img.shields.io/npm/v/ts-checker-rspack-plugin.svg)](https://www.npmjs.com/package/ts-checker-rspack-plugin)
+[![downloads](http://img.shields.io/npm/dm/ts-checker-rspack-plugin.svg)](https://npmjs.org/package/ts-checker-rspack-plugin)
 
-</div>
+## Notice
+
+This plugin is forked from [TypeStrong/fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin). The function of this plugin is basically the same as `fork-ts-checker-webpack-plugin`.
+
+> Big thanks to `fork-ts-checker-webpack-plugin` creators and contributors for their great work. ❤️
 
 ## Features
 
@@ -23,29 +20,24 @@
 
 ## Installation
 
-This plugin requires **Node.js >=14.0.0+**, **Webpack ^5.11.0**, **TypeScript ^3.6.0**
-
-* If you depend on **TypeScript 2.1 - 2.6.2**, please use [version 4](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/tree/v4.1.4) of the plugin.
-* If you depend on **Webpack 4**, **TypeScript 2.7 - 3.5.3** or **ESLint** feature, please use [version 6](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/tree/v6.2.6) of the plugin.
-* If you depend on **Node.js 12**, please use [version 8](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/tree/v8.0.0) of the plugin.
-* If you need Vue.js support, please use [version 6](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/tree/v6.5.2) of ths plugin
+This plugin requires **Node.js >=14.0.0+**, **Rspack ^1.0.0**, **TypeScript ^3.6.0**
 
 ```sh
 # with npm
-npm install --save-dev fork-ts-checker-webpack-plugin
+npm install -D ts-checker-rspack-plugin
 
 # with yarn
-yarn add --dev fork-ts-checker-webpack-plugin
+yarn add -D ts-checker-rspack-plugin
 
 # with pnpm
-pnpm add -D fork-ts-checker-webpack-plugin
+pnpm add -D ts-checker-rspack-plugin
 ```
 
 The minimal webpack config (with [ts-loader](https://github.com/TypeStrong/ts-loader))
 
 ```js
-// webpack.config.js
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// rspack.config.js
+const TsCheckerRspackPlugin = require('ts-checker-rspack-plugin');
 
 module.exports = {
   context: __dirname, // to automatically find tsconfig.json
@@ -65,10 +57,10 @@ module.exports = {
       }
     ]
   },
-  plugins: [new ForkTsCheckerWebpackPlugin()],
+  plugins: [new TsCheckerRspackPlugin()],
   watchOptions: {
     // for some systems, watching many files can result in a lot of CPU or memory usage
-    // https://webpack.js.org/configuration/watch/#watchoptionsignored
+    // https://rspack.dev/config/watch#watchoptionsignored
     // don't use this pattern, if you have a monorepo with linked packages
     ignored: /node_modules/,
   },
@@ -81,9 +73,9 @@ module.exports = {
 ## Modules resolution
 
 It's very important to be aware that **this plugin uses [TypeScript](https://github.com/Microsoft/TypeScript)'s, not
-[webpack](https://github.com/webpack/webpack)'s modules resolution**. It means that you have to setup `tsconfig.json` correctly.
+Rspack's modules resolution**. It means that you have to setup `tsconfig.json` correctly.
 
-> It's because of the performance - with TypeScript's module resolution we don't have to wait for webpack to compile files.
+> It's because of the performance - with TypeScript's module resolution we don't have to wait for Rspack to compile files.
 >
 > To debug TypeScript's modules resolution, you can use `tsc --traceResolution` command.
 
@@ -99,12 +91,12 @@ Options passed to the plugin constructor will overwrite options from the cosmico
 
 | Name         | Type                                 | Default value                             | Description                                                                                                                                                                                                                                                                                                                   |
 |--------------|--------------------------------------|-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `async`      | `boolean`                            | `compiler.options.mode === 'development'` | If `true`, reports issues **after** webpack's compilation is done. Thanks to that it doesn't block the compilation. Used only in the `watch` mode.                                                                                                                                                                            |
+| `async`      | `boolean`                            | `compiler.options.mode === 'development'` | If `true`, reports issues **after** Rspack's compilation is done. Thanks to that it doesn't block the compilation. Used only in the `watch` mode.                                                                                                                                                                            |
 | `typescript` | `object`                             | `{}`                                      | See [TypeScript options](#typescript-options).                                                                                                                                                                                                                                                                                |
 | `issue`      | `object`                             | `{}`                                      | See [Issues options](#issues-options).                                                                                                                                                                                                                                                                                        |
 | `formatter`  | `string` or `object` or `function`   | `codeframe`                               | Available formatters are `basic`, `codeframe` and a custom `function`. To [configure](https://babeljs.io/docs/en/babel-code-frame#options) `codeframe` formatter, pass: `{ type: 'codeframe', options: { <coderame options> } }`. To use absolute file path, pass: `{ type: 'codeframe', pathType: 'absolute' }`. |
 | `logger`     | `{ log: function, error: function }` or `webpack-infrastructure` | `console`     | Console-like object to print issues in `async` mode.                                                                                                                                                                                                                                                                          |
-| `devServer`  | `boolean`                            | `true`                                    | If set to `false`, errors will not be reported to Webpack Dev Server.                                                                                                                                                                                                                                                         |
+| `devServer`  | `boolean`                            | `true`                                    | If set to `false`, errors will not be reported to Dev Server.                                                                                                                                                                                                                                                         |
 
 ### TypeScript options
 
@@ -115,7 +107,7 @@ Options for the TypeScript checker (`typescript` option object).
 | `memoryLimit`       | `number`                                                                       | `2048`                                                                                                         | Memory limit for the checker process in MB. If the process exits with the allocation failed error, try to increase this number.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `configFile`        | `string`                                                                       | `'tsconfig.json'`                                                                                              | Path to the `tsconfig.json` file (path relative to the `compiler.options.context` or absolute path)                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `configOverwrite`   | `object`                                                                       | `{ compilerOptions: { skipLibCheck: true, sourceMap: false, inlineSourceMap: false, declarationMap: false } }` | This configuration will overwrite configuration from the `tsconfig.json` file. Supported fields are: `extends`, `compilerOptions`, `include`, `exclude`, `files`, and `references`.                                                                                                                                                                                                                                                                                                                                                                                            |
-| `context`           | `string`                                                                       | `dirname(configuration.configFile)`                                                                            | The base path for finding files specified in the `tsconfig.json`. Same as the `context` option from the [ts-loader](https://github.com/TypeStrong/ts-loader#context). Useful if you want to keep your `tsconfig.json` in an external package. Keep in mind that **not** having a `tsconfig.json` in your project root can cause different behaviour between `fork-ts-checker-webpack-plugin` and `tsc`. When using editors like `VS Code` it is advised to add a `tsconfig.json` file to the root of the project and extend the config file referenced in option `configFile`. |
+| `context`           | `string`                                                                       | `dirname(configuration.configFile)`                                                                            | The base path for finding files specified in the `tsconfig.json`. Same as the `context` option from the [ts-loader](https://github.com/TypeStrong/ts-loader#context). Useful if you want to keep your `tsconfig.json` in an external package. Keep in mind that **not** having a `tsconfig.json` in your project root can cause different behaviour between `ts-checker-rspack-plugin` and `tsc`. When using editors like `VS Code` it is advised to add a `tsconfig.json` file to the root of the project and extend the config file referenced in option `configFile`. |
 | `build`             | `boolean`                                                                      | `false`                                                                                                        | The equivalent of the `--build` flag for the `tsc` command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `mode`              | `'readonly'` or `'write-dts'` or `'write-tsbuildinfo'` or `'write-references'` | `build === true ? 'write-tsbuildinfo' ? 'readonly'`                                                            | Use `readonly` if you don't want to write anything on the disk, `write-dts` to write only `.d.ts` files, `write-tsbuildinfo` to write only `.tsbuildinfo` files, `write-references` to write both `.js` and `.d.ts` files of project references (last 2 modes requires `build: true`).                                                                                                                                                                                                                                                                                         |
 | `diagnosticOptions` | `object`                                                                       | `{ syntactic: false, semantic: true, declaration: false, global: false }`                                      | Settings to select which diagnostics do we want to perform.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
@@ -151,9 +143,9 @@ Include issues from the `src` directory, exclude issues from `.spec.ts` files:
 
 ```js
 module.exports = {
-  // ...the webpack configuration
+  // ...the Rspack configuration
   plugins: [
-    new ForkTsCheckerWebpackPlugin({
+    new TsCheckerRspackPlugin({
       issue: {
         include: [
           { file: '**/src/**/*' }
@@ -171,7 +163,7 @@ module.exports = {
 
 ## Plugin hooks
 
-This plugin provides some custom webpack hooks:
+This plugin provides some custom Rspack hooks:
 
 | Hook key   | Type                       | Params                | Description                                                                                                                                                        |
 |------------|----------------------------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -187,11 +179,11 @@ When we call this method with a [webpack compiler instance](https://webpack.js.o
 
 ```js
 // ./src/webpack/MyWebpackPlugin.js
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const TsCheckerRspackPlugin = require('ts-checker-rspack-plugin');
 
 class MyWebpackPlugin {
   apply(compiler) {
-    const hooks = ForkTsCheckerWebpackPlugin.getCompilerHooks(compiler);
+    const hooks = TsCheckerRspackPlugin.getCompilerHooks(compiler);
 
     // log some message on waiting
     hooks.waiting.tap('MyPlugin', () => {
@@ -206,14 +198,14 @@ class MyWebpackPlugin {
 
 module.exports = MyWebpackPlugin;
 
-// webpack.config.js
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// rspack.config.js
+const TsCheckerRspackPlugin = require('ts-checker-rspack-plugin');
 const MyWebpackPlugin = require('./src/webpack/MyWebpackPlugin');
 
 module.exports = {
   /* ... */
   plugins: [
-    new ForkTsCheckerWebpackPlugin(),
+    new TsCheckerRspackPlugin(),
     new MyWebpackPlugin()
   ]
 };
@@ -235,18 +227,11 @@ setting "generateTrace" compiler option. This is an instruction from [microsoft/
 
 ## Enabling incremental mode
 
-You must both set "incremental": true in your `tsconfig.json` (under `compilerOptions`) and also specify mode: 'write-references' in `ForkTsCheckerWebpackPlugin` settings.
-
-
-## Related projects
-
- * [`ts-loader`](https://github.com/TypeStrong/ts-loader) - TypeScript loader for webpack.
- * [`babel-loader`](https://github.com/babel/babel-loader) - Alternative TypeScript loader for webpack.
- * [`fork-ts-checker-notifier-webpack-plugin`](https://github.com/johnnyreilly/fork-ts-checker-notifier-webpack-plugin) - Notifies about build status using system notifications (similar to the [webpack-notifier](https://github.com/Turbo87/webpack-notifier)).
+You must both set "incremental": true in your `tsconfig.json` (under `compilerOptions`) and also specify mode: 'write-references' in `TsCheckerRspackPlugin` settings.
 
 ## Credits
 
-This plugin was created in [Realytics](https://www.realytics.io/) in 2017. Thank you for supporting Open Source.
+This plugin was forked from [TypeStrong/fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin), which is MIT licensed, see [LICENSE](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/blob/main/LICENSE).
 
 ## License
 
