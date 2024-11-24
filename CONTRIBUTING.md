@@ -196,26 +196,3 @@ $ git remote add upstream https://github.com/TypeStrong/fork-ts-checker-webpack-
 # Install the dependencies
 $ yarn install
 ```
-
-### Commits
-
-Commit message have to follow [conventional-commit](https://www.conventionalcommits.org/en/v1.0.0-beta.4/) standard, for example:
-
-This repository use [Commitizen](https://github.com/commitizen/cz-cli) to help you create [valid commit messages](#commit-message-guidelines).
-After staging your changes with `git add`, run `yarn commit` to start the interactive commit message CLI.
-
-## Releasing a new version
-
-This plugin uses [`📦🚀 semantic-release`](https://github.com/semantic-release/semantic-release) to automatically generate new versions and
-publish them on the [npm](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin) and [GitHub](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/releases).
-
-### Releasing a beta version
-
-Experimental features and improvements should be merged into the `beta` branch.
-If commits are messy, use **squash and merge** and put a [proper commit message](#commit-message-guidelines),
-otherwise use **rebase and merge**.
-
-### Releasing a stable version
-
-Fixes and tested features from the `beta` branch can be merged with the `main` branch. Please ensure your branch is
-up to date with the `main` and then [open a Pull Request](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/compare/main...).
