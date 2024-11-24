@@ -1,7 +1,5 @@
 import * as path from 'path';
 
-import { cosmiconfigSync } from 'cosmiconfig';
-import merge from 'deepmerge';
 import type { JSONSchema7 } from 'json-schema';
 import { validate } from 'schema-utils';
 import type * as webpack from 'webpack';
@@ -42,14 +40,11 @@ class TsCheckerRspackPlugin {
   private readonly options: TsCheckerRspackPluginOptions;
 
   constructor(options: TsCheckerRspackPluginOptions = {}) {
-    const explorerSync = cosmiconfigSync('fork-ts-checker');
-    const { config: externalOptions } = explorerSync.search() || {};
-
     // first validate options directly passed to the constructor
     const config = { name: 'TsCheckerRspackPlugin' };
     validate(schema as JSONSchema7, options, config);
 
-    this.options = merge(externalOptions || {}, options || {});
+    this.options = options;
 
     // then validate merged options
     validate(schema as JSONSchema7, this.options, config);
