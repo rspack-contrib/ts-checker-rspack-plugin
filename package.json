@@ -36,7 +36,7 @@
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "fs-extra": "^10.0.0",
-    "memfs": "^3.4.1",
+    "memfs": "^4.14.0",
     "minimatch": "^3.0.4",
     "node-abort-controller": "^3.0.1",
     "semver": "^7.3.5"
