@@ -21,7 +21,7 @@ Help us keep **fork-ts-checker-webpack-plugin** open and inclusive. Please read 
 
 ### Improve documentation
 
-As a **fork-ts-checker-webpack-plugin** user, you are the perfect candidate to help us improve our documentation: typo corrections, clarifications, more examples, etc. Take a look at the [documentation issues that need help](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/labels/docs).
+As a **fork-ts-checker-webpack-plugin** user, you are the perfect candidate to help us improve our documentation: typo corrections, clarifications, more examples, etc.
 
 Please follow the [Documentation guidelines](#documentation).
 
@@ -29,11 +29,11 @@ Please follow the [Documentation guidelines](#documentation).
 
 Some issues are created without information requested in the [Bug report guideline](#bug-report). Help make them easier to resolve by adding any relevant information.
 
-Issues with the [design label](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/labels/design) are meant to discuss the implementation of new features. Participating in the discussion is a good opportunity to get involved and influence the future direction of **fork-ts-checker-webpack-plugin**.
+Issues with the [design label](https://github.com/rspack-contrib/ts-checker-rspack-plugin/labels/design) are meant to discuss the implementation of new features. Participating in the discussion is a good opportunity to get involved and influence the future direction of **fork-ts-checker-webpack-plugin**.
 
 ### Fix bugs and implement features
 
-Confirmed bugs and ready-to-implement features are marked with the [help wanted label](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/labels/bug). Post a comment on an issue to indicate you would like to work on it and to request help from the contributors and the community.
+Confirmed bugs and ready-to-implement features are marked with the [help wanted label](https://github.com/rspack-contrib/ts-checker-rspack-plugin/labels/bug). Post a comment on an issue to indicate you would like to work on it and to request help from the contributors and the community.
 
 ### Bug report
 
@@ -178,21 +178,4 @@ perf(pencil): remove graphiteWidth option`
 The default graphite width of 10mm is always used for performance reasons.
 
 BREAKING CHANGE: The graphiteWidth option has been removed.
-```
-
-## Working with the code
-
-### Set up the workspace
-
-[Fork](https://guides.github.com/activities/forking/#fork) the project, [clone](https://guides.github.com/activities/forking/#clone) your fork, configure the remotes and install the dependencies:
-
-```bash
-# Clone your fork of the repo into the current directory
-$ git clone https://github.com/<your-username>/fork-ts-checker-webpack-plugin
-# Navigate to the newly cloned directory
-$ cd fork-ts-checker-webpack-plugin
-# Assign the original repo to a remote called "upstream"
-$ git remote add upstream https://github.com/TypeStrong/fork-ts-checker-webpack-plugin
-# Install the dependencies
-$ yarn install
 ```

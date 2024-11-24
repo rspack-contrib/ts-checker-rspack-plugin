@@ -1,5 +1,5 @@
 {
-  "name": "fork-ts-checker-webpack-plugin-ts-loader-example",
+  "name": "ts-checker-rspack-plugin-ts-loader-example",
   "version": "0.0.0",
   "main": "dist/index.js",
   "license": "MIT",
@@ -8,7 +8,7 @@
     "build": "webpack --mode=production"
   },
   "devDependencies": {
-    "fork-ts-checker-webpack-plugin": "^7.2.8",
+    "ts-checker-rspack-plugin": "^7.2.8",
     "ts-loader": "^9.2.9",
     "typescript": "^4.6.4",
     "webpack": "^5.72.0",
