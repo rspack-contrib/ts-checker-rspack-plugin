@@ -1,4 +1,3 @@
-
 # TS Checker Rspack Plugin
 
 Rspack plugin that runs TypeScript type checker on a separate process.
@@ -6,17 +5,17 @@ Rspack plugin that runs TypeScript type checker on a separate process.
 [![npm version](https://img.shields.io/npm/v/ts-checker-rspack-plugin.svg)](https://www.npmjs.com/package/ts-checker-rspack-plugin)
 [![downloads](http://img.shields.io/npm/dm/ts-checker-rspack-plugin.svg)](https://npmjs.org/package/ts-checker-rspack-plugin)
 
-## Notice
+## Credits
 
-This plugin is forked from [TypeStrong/fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin), the original author is [Piotr Oleś](https://github.com/piotr-oles). The function of this plugin is basically the same as `fork-ts-checker-webpack-plugin`.
+This plugin is forked from [TypeStrong/fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin), which is created by [Piotr Oleś](https://github.com/piotr-oles). See the original project's [LICENSE](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/blob/main/LICENSE).
 
-> Big thanks to `fork-ts-checker-webpack-plugin` creators and contributors for their great work. ❤️
+Big thanks to `fork-ts-checker-webpack-plugin` creators and contributors for their great work. ❤️
 
 ## Features
 
- * Speeds up [TypeScript](https://github.com/Microsoft/TypeScript) type checking (by moving it to a separate process) 🏎
- * Supports modern TypeScript features like [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) and [incremental mode](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#faster-subsequent-builds-with-the---incremental-flag) ✨
- * Displays nice error messages with the [code frame](https://babeljs.io/docs/en/next/babel-code-frame.html) formatter 🌈
+- Speeds up [TypeScript](https://github.com/Microsoft/TypeScript) type checking (by moving it to a separate process) 🏎
+- Supports modern TypeScript features like [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) and [incremental mode](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#faster-subsequent-builds-with-the---incremental-flag) ✨
+- Displays nice error messages with the [code frame](https://babeljs.io/docs/en/next/babel-code-frame.html) formatter 🌈
 
 ## Installation
 
@@ -43,19 +42,19 @@ module.exports = {
   context: __dirname, // to automatically find tsconfig.json
   entry: './src/index.ts',
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: ['.ts', '.tsx', '.js'],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        // add transpileOnly option if you use ts-loader < 9.3.0 
+        // add transpileOnly option if you use ts-loader < 9.3.0
         // options: {
         //   transpileOnly: true
         // }
-      }
-    ]
+      },
+    ],
   },
   plugins: [new TsCheckerRspackPlugin()],
   watchOptions: {
@@ -83,36 +82,37 @@ Rspack's modules resolution**. It means that you have to setup `tsconfig.json` c
 
 This plugin uses [`cosmiconfig`](https://github.com/davidtheclark/cosmiconfig). This means that besides the plugin constructor,
 you can place your configuration in the:
- * `"fork-ts-checker"` field in the `package.json`
- * `.fork-ts-checkerrc` file in JSON or YAML format
- * `fork-ts-checker.config.js` file exporting a JS object
+
+- `"fork-ts-checker"` field in the `package.json`
+- `.fork-ts-checkerrc` file in JSON or YAML format
+- `fork-ts-checker.config.js` file exporting a JS object
 
 Options passed to the plugin constructor will overwrite options from the cosmiconfig (using [deepmerge](https://github.com/TehShrike/deepmerge)).
 
-| Name         | Type                                 | Default value                             | Description                                                                                                                                                                                                                                                                                                                   |
-|--------------|--------------------------------------|-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `async`      | `boolean`                            | `compiler.options.mode === 'development'` | If `true`, reports issues **after** Rspack's compilation is done. Thanks to that it doesn't block the compilation. Used only in the `watch` mode.                                                                                                                                                                            |
-| `typescript` | `object`                             | `{}`                                      | See [TypeScript options](#typescript-options).                                                                                                                                                                                                                                                                                |
-| `issue`      | `object`                             | `{}`                                      | See [Issues options](#issues-options).                                                                                                                                                                                                                                                                                        |
-| `formatter`  | `string` or `object` or `function`   | `codeframe`                               | Available formatters are `basic`, `codeframe` and a custom `function`. To [configure](https://babeljs.io/docs/en/babel-code-frame#options) `codeframe` formatter, pass: `{ type: 'codeframe', options: { <coderame options> } }`. To use absolute file path, pass: `{ type: 'codeframe', pathType: 'absolute' }`. |
-| `logger`     | `{ log: function, error: function }` or `webpack-infrastructure` | `console`     | Console-like object to print issues in `async` mode.                                                                                                                                                                                                                                                                          |
-| `devServer`  | `boolean`                            | `true`                                    | If set to `false`, errors will not be reported to Dev Server.                                                                                                                                                                                                                                                         |
+| Name         | Type                                                             | Default value                             | Description                                                                                                                                                                                                                                                                                                       |
+| ------------ | ---------------------------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async`      | `boolean`                                                        | `compiler.options.mode === 'development'` | If `true`, reports issues **after** Rspack's compilation is done. Thanks to that it doesn't block the compilation. Used only in the `watch` mode.                                                                                                                                                                 |
+| `typescript` | `object`                                                         | `{}`                                      | See [TypeScript options](#typescript-options).                                                                                                                                                                                                                                                                    |
+| `issue`      | `object`                                                         | `{}`                                      | See [Issues options](#issues-options).                                                                                                                                                                                                                                                                            |
+| `formatter`  | `string` or `object` or `function`                               | `codeframe`                               | Available formatters are `basic`, `codeframe` and a custom `function`. To [configure](https://babeljs.io/docs/en/babel-code-frame#options) `codeframe` formatter, pass: `{ type: 'codeframe', options: { <coderame options> } }`. To use absolute file path, pass: `{ type: 'codeframe', pathType: 'absolute' }`. |
+| `logger`     | `{ log: function, error: function }` or `webpack-infrastructure` | `console`                                 | Console-like object to print issues in `async` mode.                                                                                                                                                                                                                                                              |
+| `devServer`  | `boolean`                                                        | `true`                                    | If set to `false`, errors will not be reported to Dev Server.                                                                                                                                                                                                                                                     |
 
 ### TypeScript options
 
 Options for the TypeScript checker (`typescript` option object).
 
-| Name                | Type                                                                           | Default value                                                                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|---------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `memoryLimit`       | `number`                                                                       | `2048`                                                                                                         | Memory limit for the checker process in MB. If the process exits with the allocation failed error, try to increase this number.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `configFile`        | `string`                                                                       | `'tsconfig.json'`                                                                                              | Path to the `tsconfig.json` file (path relative to the `compiler.options.context` or absolute path)                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `configOverwrite`   | `object`                                                                       | `{ compilerOptions: { skipLibCheck: true, sourceMap: false, inlineSourceMap: false, declarationMap: false } }` | This configuration will overwrite configuration from the `tsconfig.json` file. Supported fields are: `extends`, `compilerOptions`, `include`, `exclude`, `files`, and `references`.                                                                                                                                                                                                                                                                                                                                                                                            |
+| Name                | Type                                                                           | Default value                                                                                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `memoryLimit`       | `number`                                                                       | `2048`                                                                                                         | Memory limit for the checker process in MB. If the process exits with the allocation failed error, try to increase this number.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `configFile`        | `string`                                                                       | `'tsconfig.json'`                                                                                              | Path to the `tsconfig.json` file (path relative to the `compiler.options.context` or absolute path)                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `configOverwrite`   | `object`                                                                       | `{ compilerOptions: { skipLibCheck: true, sourceMap: false, inlineSourceMap: false, declarationMap: false } }` | This configuration will overwrite configuration from the `tsconfig.json` file. Supported fields are: `extends`, `compilerOptions`, `include`, `exclude`, `files`, and `references`.                                                                                                                                                                                                                                                                                                                                                                                      |
 | `context`           | `string`                                                                       | `dirname(configuration.configFile)`                                                                            | The base path for finding files specified in the `tsconfig.json`. Same as the `context` option from the [ts-loader](https://github.com/TypeStrong/ts-loader#context). Useful if you want to keep your `tsconfig.json` in an external package. Keep in mind that **not** having a `tsconfig.json` in your project root can cause different behaviour between `ts-checker-rspack-plugin` and `tsc`. When using editors like `VS Code` it is advised to add a `tsconfig.json` file to the root of the project and extend the config file referenced in option `configFile`. |
-| `build`             | `boolean`                                                                      | `false`                                                                                                        | The equivalent of the `--build` flag for the `tsc` command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `mode`              | `'readonly'` or `'write-dts'` or `'write-tsbuildinfo'` or `'write-references'` | `build === true ? 'write-tsbuildinfo' ? 'readonly'`                                                            | Use `readonly` if you don't want to write anything on the disk, `write-dts` to write only `.d.ts` files, `write-tsbuildinfo` to write only `.tsbuildinfo` files, `write-references` to write both `.js` and `.d.ts` files of project references (last 2 modes requires `build: true`).                                                                                                                                                                                                                                                                                         |
-| `diagnosticOptions` | `object`                                                                       | `{ syntactic: false, semantic: true, declaration: false, global: false }`                                      | Settings to select which diagnostics do we want to perform.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `profile`           | `boolean`                                                                      | `false`                                                                                                        | Measures and prints timings related to the TypeScript performance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `typescriptPath`    | `string`                                                                       | `require.resolve('typescript')`                                                                                | If supplied this is a custom path where TypeScript can be found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `build`             | `boolean`                                                                      | `false`                                                                                                        | The equivalent of the `--build` flag for the `tsc` command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `mode`              | `'readonly'` or `'write-dts'` or `'write-tsbuildinfo'` or `'write-references'` | `build === true ? 'write-tsbuildinfo' ? 'readonly'`                                                            | Use `readonly` if you don't want to write anything on the disk, `write-dts` to write only `.d.ts` files, `write-tsbuildinfo` to write only `.tsbuildinfo` files, `write-references` to write both `.js` and `.d.ts` files of project references (last 2 modes requires `build: true`).                                                                                                                                                                                                                                                                                   |
+| `diagnosticOptions` | `object`                                                                       | `{ syntactic: false, semantic: true, declaration: false, global: false }`                                      | Settings to select which diagnostics do we want to perform.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `profile`           | `boolean`                                                                      | `false`                                                                                                        | Measures and prints timings related to the TypeScript performance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `typescriptPath`    | `string`                                                                       | `require.resolve('typescript')`                                                                                | If supplied this is a custom path where TypeScript can be found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ### Issues options
 
@@ -132,7 +132,7 @@ type IssueFilter = IssueMatch | IssuePredicate | (IssueMatch | IssuePredicate)[]
 ```
 
 | Name      | Type          | Default value | Description                                                                                                                                                |
-|-----------|---------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------- | ------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `include` | `IssueFilter` | `undefined`   | If `object`, defines issue properties that should be [matched](src/issue/issue-match.ts). If `function`, acts as a predicate where `issue` is an argument. |
 | `exclude` | `IssueFilter` | `undefined`   | Same as `include` but issues that match this predicate will be excluded.                                                                                   |
 
@@ -147,15 +147,11 @@ module.exports = {
   plugins: [
     new TsCheckerRspackPlugin({
       issue: {
-        include: [
-          { file: '**/src/**/*' }
-        ],
-        exclude: [
-          { file: '**/*.spec.ts' }
-        ]
-      }
-    })
-  ]
+        include: [{ file: '**/src/**/*' }],
+        exclude: [{ file: '**/*.spec.ts' }],
+      },
+    }),
+  ],
 };
 ```
 
@@ -166,7 +162,7 @@ module.exports = {
 This plugin provides some custom Rspack hooks:
 
 | Hook key   | Type                       | Params                | Description                                                                                                                                                        |
-|------------|----------------------------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------- | -------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `start`    | `AsyncSeriesWaterfallHook` | `change, compilation` | Starts issues checking for a compilation. It's an async waterfall hook, so you can modify the list of changed and removed files or delay the start of the service. |
 | `waiting`  | `SyncHook`                 | `compilation`         | Waiting for the issues checking.                                                                                                                                   |
 | `canceled` | `SyncHook`                 | `compilation`         | Issues checking for the compilation has been canceled.                                                                                                             |
@@ -190,9 +186,7 @@ class MyWebpackPlugin {
       console.log('waiting for issues');
     });
     // don't show warnings
-    hooks.issues.tap('MyPlugin', (issues) =>
-      issues.filter((issue) => issue.severity === 'error')
-    );
+    hooks.issues.tap('MyPlugin', (issues) => issues.filter((issue) => issue.severity === 'error'));
   }
 }
 
@@ -204,10 +198,7 @@ const MyWebpackPlugin = require('./src/webpack/MyWebpackPlugin');
 
 module.exports = {
   /* ... */
-  plugins: [
-    new TsCheckerRspackPlugin(),
-    new MyWebpackPlugin()
-  ]
+  plugins: [new TsCheckerRspackPlugin(), new MyWebpackPlugin()],
 };
 ```
 
@@ -229,11 +220,6 @@ setting "generateTrace" compiler option. This is an instruction from [microsoft/
 
 You must both set "incremental": true in your `tsconfig.json` (under `compilerOptions`) and also specify mode: 'write-references' in `TsCheckerRspackPlugin` settings.
 
-## Credits
-
-This plugin was forked from [TypeStrong/fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin), which is MIT licensed, see [LICENSE](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/blob/main/LICENSE). 
-
 ## License
 
 MIT License
-
