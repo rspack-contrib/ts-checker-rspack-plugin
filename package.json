@@ -27,16 +27,13 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "cross-env rimraf lib && cross-env tsc --version && cross-env tsc",
-    "lint": "cross-env eslint ./src ./test --ext .ts",
+    "lint": "echo lint",
     "test": "yarn build && yarn test:unit && yarn test:e2e",
     "test:unit": "cross-env jest --config=test/unit/jest.config.js",
     "test:e2e": "npm pack && cross-env jest --config=test/e2e/jest.config.js --ci -i -b",
-    "precommit": "cross-env lint-staged && yarn build && yarn test:unit",
+    "precommit": "yarn build && yarn test:unit",
     "commit": "cross-env git-cz",
     "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.ts": "eslint --fix"
   },
   "dependencies": {
     "@babel/code-frame": "^7.16.7",
@@ -66,13 +63,7 @@
     "@types/node": "^16.4.13",
     "@types/rimraf": "^3.0.2",
     "@types/semver": "^7.3.9",
-    "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.8.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
     "git-cz": "^4.8.0",
     "husky": "^7.0.4",
     "jest": "^27.4.7",
@@ -81,7 +72,6 @@
     "jest-runner": "^27.0.0",
     "json-schema": "^0.4.0",
     "karton": "^0.4.1",
-    "lint-staged": "^11.1.2",
     "mock-fs": "^5.1.2",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",

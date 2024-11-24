@@ -22,6 +22,5 @@ assignees: ''
 ## Environment
  - **ts-checker-rspack-plugin**: [version from the `package.json`]
  - **typescript**: [version from the `package.json`]
- - **eslint**: [version from the `package.json`]
  - **@rspack/core**: [version from the `package.json`]
  - **os**: [e.g. Ubuntu 19.04]
