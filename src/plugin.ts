@@ -1,7 +1,5 @@
 import * as path from 'path';
 
-import type { JSONSchema7 } from 'json-schema';
-import { validate } from 'schema-utils';
 import type * as rspack from '@rspack/core';
 
 import { tapAfterCompileToAddDependencies } from './hooks/tap-after-compile-to-add-dependencies';
@@ -12,7 +10,6 @@ import { tapStopToTerminateWorkers } from './hooks/tap-stop-to-terminate-workers
 import { createPluginConfig } from './plugin-config';
 import { getPluginHooks } from './plugin-hooks';
 import type { TsCheckerRspackPluginOptions } from './plugin-options';
-import schema from './plugin-options.json';
 import { dependenciesPool, issuesPool } from './plugin-pools';
 import { createPluginState } from './plugin-state';
 import { createRpcWorker } from './rpc';
@@ -40,14 +37,7 @@ class TsCheckerRspackPlugin {
   private readonly options: TsCheckerRspackPluginOptions;
 
   constructor(options: TsCheckerRspackPluginOptions = {}) {
-    // first validate options directly passed to the constructor
-    const config = { name: 'TsCheckerRspackPlugin' };
-    validate(schema as JSONSchema7, options, config);
-
     this.options = options;
-
-    // then validate merged options
-    validate(schema as JSONSchema7, this.options, config);
   }
 
   public static getCompilerHooks(compiler: rspack.Compiler) {
