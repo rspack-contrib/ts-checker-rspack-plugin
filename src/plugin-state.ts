@@ -1,5 +1,3 @@
-import type { AbortController } from 'node-abort-controller';
-
 import type { FilesChange } from './files-change';
 import type { FilesMatch } from './files-match';
 import type { Issue } from './issue';

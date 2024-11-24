@@ -1,4 +1,3 @@
-import { AbortController } from 'node-abort-controller';
 import type * as rspack from '@rspack/core';
 
 import type { FilesChange } from '../files-change';
