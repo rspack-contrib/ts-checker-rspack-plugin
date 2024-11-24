@@ -5,7 +5,6 @@ permissions:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
-    needs: build
     strategy:
       matrix:
         node: [22]
