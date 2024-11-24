@@ -8,7 +8,7 @@ Rspack plugin that runs TypeScript type checker on a separate process.
 
 ## Notice
 
-This plugin is forked from [TypeStrong/fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin). The function of this plugin is basically the same as `fork-ts-checker-webpack-plugin`.
+This plugin is forked from [TypeStrong/fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin), the original author is [Piotr Oleś](https://github.com/piotr-oles). The function of this plugin is basically the same as `fork-ts-checker-webpack-plugin`.
 
 > Big thanks to `fork-ts-checker-webpack-plugin` creators and contributors for their great work. ❤️
 
@@ -231,7 +231,7 @@ You must both set "incremental": true in your `tsconfig.json` (under `compilerOp
 
 ## Credits
 
-This plugin was forked from [TypeStrong/fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin), which is MIT licensed, see [LICENSE](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/blob/main/LICENSE).
+This plugin was forked from [TypeStrong/fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin), which is MIT licensed, see [LICENSE](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/blob/main/LICENSE). 
 
 ## License
 
