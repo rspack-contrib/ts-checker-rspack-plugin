@@ -59,7 +59,7 @@ Here is a summary of the steps to follow:
 ```bash
 $ git checkout main
 $ git pull upstream main
-$ yarn install
+$ pnpm install
 ```
 
 3. Create a new topic branch (off the main project development branch) to contain your feature, change, or fix:

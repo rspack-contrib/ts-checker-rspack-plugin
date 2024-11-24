@@ -24,11 +24,10 @@
   "scripts": {
     "build": "cross-env rimraf lib && cross-env tsc --version && cross-env tsc",
     "lint": "echo lint",
-    "test": "yarn build && yarn test:unit && yarn test:e2e",
+    "test": "pnpm build && pnpm test:unit && pnpm test:e2e",
     "test:unit": "cross-env jest --config=test/unit/jest.config.js",
     "test:e2e": "npm pack && cross-env jest --config=test/e2e/jest.config.js --ci -i -b",
-    "precommit": "yarn build && yarn test:unit",
-    "commit": "cross-env git-cz",
+    "precommit": "pnpm build && pnpm test:unit",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -61,7 +60,6 @@
     "@types/rimraf": "^3.0.2",
     "@types/semver": "^7.3.9",
     "cross-env": "^7.0.3",
-    "git-cz": "^4.8.0",
     "husky": "^7.0.4",
     "jest": "^27.4.7",
     "jest-circus": "^27.4.6",
@@ -78,11 +76,11 @@
   },
   "engines": {
     "node": ">=12.13.0",
-    "yarn": ">=1.0.0"
+    "pnpm": ">=1.0.0"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "pnpm@9.14.2"
 }

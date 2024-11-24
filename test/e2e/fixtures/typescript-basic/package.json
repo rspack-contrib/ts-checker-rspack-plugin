@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
+  "scripts": {
+    "serve": "rspack serve"
+  },
   "dependencies": {
     "ts-loader": "^5.0.0",
     "typescript": "^3.8.0",

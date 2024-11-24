@@ -8,6 +8,6 @@
     "lib"
   ],
   "dependencies": {
-    "@project-references-fixture/shared": "1.0.0"
+    "@project-references-fixture/shared": "workspace:*"
   }
 }

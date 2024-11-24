@@ -39,7 +39,7 @@ function createTypeScriptWorkerConfig(
   const typescriptPath = optionsAsObject.typescriptPath || require.resolve('typescript');
 
   return {
-    enabled: options !== false,
+    enabled: Boolean(options) || options === undefined,
     memoryLimit: 2048,
     build: false,
     mode: optionsAsObject.build ? 'write-tsbuildinfo' : 'readonly',
