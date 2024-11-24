@@ -52,7 +52,7 @@ describe('typescript/type-script-support', () => {
 
   it("doesn't throw error if typescript version is greater or equal 3.6.0", async () => {
     jest.setMock('typescript', { version: '3.6.0' });
-    jest.setMock('fs-extra', { existsSync: () => true });
+    jest.setMock('node:fs', { existsSync: () => true });
 
     const { assertTypeScriptSupport } = await import('src/typescript/type-script-support');
 
@@ -61,7 +61,7 @@ describe('typescript/type-script-support', () => {
 
   it('throws error if there is no tsconfig.json file', async () => {
     jest.setMock('typescript', { version: '3.8.0' });
-    jest.setMock('fs-extra', { existsSync: () => false });
+    jest.setMock('node:fs', { existsSync: () => false });
 
     const { assertTypeScriptSupport } = await import('src/typescript/type-script-support');
 

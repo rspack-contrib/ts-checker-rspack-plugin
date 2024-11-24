@@ -1,7 +1,7 @@
 import type { Dirent, Stats } from 'fs';
 import { dirname, basename, join, normalize } from 'path';
 
-import * as fs from 'fs-extra';
+import fs from 'node:fs';
 
 import type { FileSystem } from './file-system';
 
