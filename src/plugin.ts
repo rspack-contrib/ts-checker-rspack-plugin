@@ -27,7 +27,7 @@ class TsCheckerRspackPlugin {
    * Current version of the plugin
    * TODO: use `define` to replace it
    */
-  static readonly version: string = '1.0.0';
+  static readonly version: string = '1.0.0-beta.0';
   /**
    * Default pools for the plugin concurrency limit
    */

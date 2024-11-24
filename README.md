@@ -36,7 +36,7 @@ The minimal webpack config (with [ts-loader](https://github.com/TypeStrong/ts-lo
 
 ```js
 // rspack.config.js
-const TsCheckerRspackPlugin = require('ts-checker-rspack-plugin');
+const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
 
 module.exports = {
   context: __dirname, // to automatically find tsconfig.json
@@ -175,7 +175,7 @@ When we call this method with a [webpack compiler instance](https://webpack.js.o
 
 ```js
 // ./src/webpack/MyWebpackPlugin.js
-const TsCheckerRspackPlugin = require('ts-checker-rspack-plugin');
+const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
 
 class MyWebpackPlugin {
   apply(compiler) {
@@ -193,7 +193,7 @@ class MyWebpackPlugin {
 module.exports = MyWebpackPlugin;
 
 // rspack.config.js
-const TsCheckerRspackPlugin = require('ts-checker-rspack-plugin');
+const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
 const MyWebpackPlugin = require('./src/webpack/MyWebpackPlugin');
 
 module.exports = {

@@ -20,8 +20,8 @@ assignees: ''
 <!-- Location of a (minimal) repository that demonstrates the issue. -->
 
 ## Environment
- - **fork-ts-checker-webpack-plugin**: [version from the `package.json`]
+ - **ts-checker-rspack-plugin**: [version from the `package.json`]
  - **typescript**: [version from the `package.json`]
  - **eslint**: [version from the `package.json`]
- - **webpack**: [version from the `package.json`]
+ - **@rspack/core**: [version from the `package.json`]
  - **os**: [e.g. Ubuntu 19.04]

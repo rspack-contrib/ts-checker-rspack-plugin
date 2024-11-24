@@ -20,7 +20,7 @@ beforeAll(async () => {
   global.sandbox = await createSandbox({
     lockDirectory: path.resolve(__dirname, '__locks__'),
     fixedDependencies: {
-      'fork-ts-checker-webpack-plugin': `file:${TsCheckerRspackPluginTar}`,
+      'ts-checker-rspack-plugin': `file:${TsCheckerRspackPluginTar}`,
     },
   });
 });

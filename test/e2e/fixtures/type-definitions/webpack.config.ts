@@ -1,4 +1,4 @@
-import TsCheckerRspackPlugin from 'fork-ts-checker-webpack-plugin';
+import TsCheckerRspackPlugin from 'ts-checker-rspack-plugin';
 
 const config = {
   entry: './src/index.ts',

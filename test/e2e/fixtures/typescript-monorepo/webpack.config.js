@@ -1,5 +1,5 @@
 const path = require('path');
-const TsCheckerRspackPlugin = require('fork-ts-checker-webpack-plugin');
+const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
 
 module.exports = {
   entry: './packages/client/src/index.ts',

@@ -1,6 +1,6 @@
 const path = require('path');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
-const TsCheckerRspackPlugin = require('fork-ts-checker-webpack-plugin');
+const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
 
 module.exports = {
   entry: './src/index.ts',

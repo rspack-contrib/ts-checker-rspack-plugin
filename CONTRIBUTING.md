@@ -1,6 +1,6 @@
-# Contributing to fork-ts-checker-webpack-plugin
+# Contributing to ts-checker-rspack-plugin
 
-✨ Thanks for contributing to **fork-ts-checker-webpack-plugin**! ✨
+✨ Thanks for contributing to **ts-checker-rspack-plugin**! ✨
 
 As a contributor, here are the guidelines we would like you to follow:
 
@@ -15,13 +15,13 @@ We also recommend that you read [How to Contribute to Open Source](https://opens
 
 ## Code of conduct
 
-Help us keep **fork-ts-checker-webpack-plugin** open and inclusive. Please read and follow our [Code of conduct](CODE_OF_CONDUCT.md).
+Help us keep **ts-checker-rspack-plugin** open and inclusive. Please read and follow our [Code of conduct](CODE_OF_CONDUCT.md).
 
 ## How can I contribute?
 
 ### Improve documentation
 
-As a **fork-ts-checker-webpack-plugin** user, you are the perfect candidate to help us improve our documentation: typo corrections, clarifications, more examples, etc.
+As a **ts-checker-rspack-plugin** user, you are the perfect candidate to help us improve our documentation: typo corrections, clarifications, more examples, etc.
 
 Please follow the [Documentation guidelines](#documentation).
 
@@ -29,7 +29,7 @@ Please follow the [Documentation guidelines](#documentation).
 
 Some issues are created without information requested in the [Bug report guideline](#bug-report). Help make them easier to resolve by adding any relevant information.
 
-Issues with the [design label](https://github.com/rspack-contrib/ts-checker-rspack-plugin/labels/design) are meant to discuss the implementation of new features. Participating in the discussion is a good opportunity to get involved and influence the future direction of **fork-ts-checker-webpack-plugin**.
+Issues with the [design label](https://github.com/rspack-contrib/ts-checker-rspack-plugin/labels/design) are meant to discuss the implementation of new features. Participating in the discussion is a good opportunity to get involved and influence the future direction of **ts-checker-rspack-plugin**.
 
 ### Fix bugs and implement features
 
@@ -99,10 +99,10 @@ To ensure consistency and quality throughout the source code, all code modificat
 
 To ensure consistency and quality, all documentation modifications must:
 
-- Refer to brand in [bold](https://help.github.com/articles/basic-writing-and-formatting-syntax/#styling-text) with proper capitalization, i.e. **GitHub**, **fork-ts-checker-webpack-plugin**, **npm**
+- Refer to brand in [bold](https://help.github.com/articles/basic-writing-and-formatting-syntax/#styling-text) with proper capitalization, i.e. **GitHub**, **ts-checker-rspack-plugin**, **npm**
 - Prefer [tables](https://help.github.com/articles/organizing-information-with-tables) over [lists](https://help.github.com/articles/basic-writing-and-formatting-syntax/#lists) when listing key values, i.e. List of options with their description
 - Use [links](https://help.github.com/articles/basic-writing-and-formatting-syntax/#links) when you are referring to:
-  - a _fork-ts-checker-webpack-plugin_ concept described somewhere else in the documentation, i.e. How to [contribute](CONTRIBUTING.md)
+  - a _ts-checker-rspack-plugin_ concept described somewhere else in the documentation, i.e. How to [contribute](CONTRIBUTING.md)
   - a third-party product/brand/service, i.e. Integrate with [GitHub](https://github.com)
   - an external concept or feature, i.e. Create a [GitHub release](https://help.github.com/articles/creating-releases)
   - a package or module, i.e. The [`typescript`](https://github.com/Microsoft/TypeScript) module
@@ -142,10 +142,6 @@ Each commit message consists of a **header**, a **body** and a **footer**. The h
 The **header** is mandatory and the **scope** of the header is optional.
 
 The **footer** can contain a [closing reference to an issue](https://help.github.com/articles/closing-issues-via-commit-messages).
-
-#### Type
-
-The type is forced by the `commitlint` package. To see available types, run `yarn commit` or check [changelog.config.js](changelog.config.js) file
 
 #### Subject
 

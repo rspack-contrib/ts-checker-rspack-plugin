@@ -57,6 +57,7 @@
     "webpack": "^5.11.0"
   },
   "devDependencies": {
+    "@jest/console": "^27.0.0",
     "@types/babel__code-frame": "^7.0.3",
     "@types/cross-spawn": "^6.0.2",
     "@types/fs-extra": "^9.0.13",
@@ -69,7 +70,6 @@
     "@types/semver": "^7.3.9",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
-    "commitlint": "^16.1.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.8.0",
     "eslint-plugin-import": "^2.25.4",
@@ -80,6 +80,7 @@
     "jest": "^27.4.7",
     "jest-circus": "^27.4.6",
     "jest-environment-node": "^27.4.6",
+    "jest-runner": "^27.0.0",
     "json-schema": "^0.4.0",
     "karton": "^0.4.1",
     "lint-staged": "^11.1.2",

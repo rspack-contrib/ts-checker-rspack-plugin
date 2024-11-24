@@ -10,7 +10,7 @@ describe('plugin', () => {
   );
 
   it('exposes current version', () => {
-    expect(TsCheckerRspackPlugin.version).toEqual('{{VERSION}}'); // will be replaced by the @semantic-release/exec
+    expect(TsCheckerRspackPlugin.version).toEqual(require('../../package.json').version);
   });
 
   it("doesn't throw an error for empty options", () => {

@@ -1,3 +1,3 @@
 import { TsCheckerRspackPlugin } from './plugin';
 
-export = TsCheckerRspackPlugin;
+export { TsCheckerRspackPlugin };
