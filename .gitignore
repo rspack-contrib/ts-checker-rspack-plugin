@@ -3,9 +3,11 @@
 
 # Package artifacts
 /lib
+dist
 
 # E2E tests lock file cache dir
 __locks__
+test-results
 
 # Coverage directory used by tools like istanbul
 coverage
