@@ -26,9 +26,6 @@ importers:
       picocolors:
         specifier: ^1.1.1
         version: 1.1.1
-      semver:
-        specifier: ^7.3.5
-        version: 7.6.3
     devDependencies:
       '@jest/console':
         specifier: ^27.0.0
@@ -54,9 +51,6 @@ importers:
       '@types/rimraf':
         specifier: ^3.0.2
         version: 3.0.2
-      '@types/semver':
-        specifier: ^7.3.9
-        version: 7.5.8
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -1147,9 +1141,6 @@ packages:
 
   '@types/rimraf@3.0.2':
     resolution: {integrity: sha512-F3OznnSLAUxFrCEu/L5PY8+ny8DtcFRjx7fZZ9bycvXRi3KPTRS9HOitGZwvPg0juRhXFWIeKX58cnX5YqLohQ==}
-
-  '@types/semver@7.5.8':
-    resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
 
   '@types/send@0.17.4':
     resolution: {integrity: sha512-x2EM6TJOybec7c52BX0ZspPodMsQUd5L6PRwOunVyVUhXiBSKf3AezDL8Dgvgt5o0UfKNfuA0eMLr2wLT4AiBA==}
@@ -4877,8 +4868,6 @@ snapshots:
     dependencies:
       '@types/glob': 8.1.0
       '@types/node': 16.18.119
-
-  '@types/semver@7.5.8': {}
 
   '@types/send@0.17.4':
     dependencies:

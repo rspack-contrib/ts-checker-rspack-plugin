@@ -1,7 +1,5 @@
 import os from 'os';
-
 import fs from 'node:fs';
-import * as semver from 'semver';
 
 import type { TypeScriptWorkerConfig } from './type-script-worker-config';
 
@@ -18,23 +16,6 @@ function assertTypeScriptSupport(config: TypeScriptWorkerConfig) {
   if (!typescriptVersion) {
     throw new Error(
       'When you use TsCheckerRspackPlugin with typescript reporter enabled, you must install `typescript` package.'
-    );
-  }
-
-  if (semver.lt(typescriptVersion, '3.6.0')) {
-    throw new Error(
-      [
-        `TsCheckerRspackPlugin cannot use the current typescript version of ${typescriptVersion}.`,
-        'The minimum required version is 3.6.0.',
-      ].join(os.EOL)
-    );
-  }
-  if (config.build && semver.lt(typescriptVersion, '3.8.0')) {
-    throw new Error(
-      [
-        `TsCheckerRspackPlugin doesn't support build option for the current typescript version of ${typescriptVersion}.`,
-        'The minimum required version is 3.8.0.',
-      ].join(os.EOL)
     );
   }
 
