@@ -2,12 +2,16 @@
   "name": "test-e2e",
   "type": "module",
   "scripts": {
-    "test": "playwright test",
+    "test": "playwright test && pnpm test:webpack",
+    "test:webpack": "cross-env WEBPACK=true playwright test",
     "setup": "playwright install chromium"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0",
     "@rsbuild/core": "^1.1.4",
+    "@rsbuild/webpack": "^1.1.3",
+    "@rsbuild/plugin-webpack-swc": "^1.0.8",
+    "cross-env": "^7.0.3",
     "playwright": "^1.49.0",
     "typescript": "^5.7.2"
   }

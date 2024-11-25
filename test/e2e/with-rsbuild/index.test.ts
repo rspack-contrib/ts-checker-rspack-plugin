@@ -1,17 +1,50 @@
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { expect, test } from '@playwright/test';
-import { createRsbuild } from '@rsbuild/core';
+import {
+  createRsbuild as baseCreateRsbuild,
+  mergeRsbuildConfig,
+  type CreateRsbuildOptions,
+} from '@rsbuild/core';
+import { webpackProvider } from '@rsbuild/webpack';
+import { pluginSwc } from '@rsbuild/plugin-webpack-swc';
 import { TsCheckerRspackPlugin } from '../../../lib';
 import { getRandomPort, proxyConsole } from '../helper';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+/**
+ * Although this plugin is designed for Rspack, it can also be used in webpack in some cases.
+ * So we need to test the webpack compatibility.
+ */
+const createRsbuild = async (config: CreateRsbuildOptions) => {
+  const rsbuildConfig = mergeRsbuildConfig(
+    config.rsbuildConfig,
+    { server: { port: getRandomPort() } },
+    process.env.WEBPACK
+      ? {
+          tools: {
+            webpack: config.rsbuildConfig?.tools?.rspack as any,
+          },
+          dev: {
+            progressBar: false,
+          },
+          provider: webpackProvider,
+          plugins: [pluginSwc()],
+        }
+      : {}
+  );
+
+  return await baseCreateRsbuild({
+    cwd: __dirname,
+    rsbuildConfig,
+  });
+};
+
 test('should throw error when exist type errors', async () => {
   const { logs, restore } = proxyConsole();
 
   const rsbuild = await createRsbuild({
-    cwd: __dirname,
     rsbuildConfig: {
       tools: {
         rspack: {
@@ -38,7 +71,6 @@ test('should throw error when exist type errors in dev mode', async ({ page }) =
   const { logs, restore } = proxyConsole();
 
   const rsbuild = await createRsbuild({
-    cwd: __dirname,
     rsbuildConfig: {
       tools: {
         rspack: {
@@ -48,9 +80,6 @@ test('should throw error when exist type errors in dev mode', async ({ page }) =
             }),
           ],
         },
-      },
-      server: {
-        port: getRandomPort(),
       },
     },
   });
@@ -73,7 +102,6 @@ test('should throw error when exist type errors in dev mode', async ({ page }) =
 
 test('should not throw error when the file is excluded', async () => {
   const rsbuild = await createRsbuild({
-    cwd: __dirname,
     rsbuildConfig: {
       tools: {
         rspack: {
@@ -94,7 +122,6 @@ test('should not throw error when the file is excluded', async () => {
 
 test('should not throw error when the file is excluded by code', async () => {
   const rsbuild = await createRsbuild({
-    cwd: __dirname,
     rsbuildConfig: {
       tools: {
         rspack: {
