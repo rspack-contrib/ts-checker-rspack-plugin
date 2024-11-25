@@ -38,7 +38,7 @@
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "memfs": "^4.14.0",
-    "minimatch": "^3.0.4",
+    "minimatch": "^9.0.5",
     "semver": "^7.3.5"
   },
   "peerDependencies": {
@@ -51,7 +51,6 @@
     "@types/babel__code-frame": "^7.0.3",
     "@types/cross-spawn": "^6.0.2",
     "@types/jest": "^27.4.0",
-    "@types/minimatch": "^3.0.5",
     "@types/mock-fs": "^4.13.1",
     "@types/node": "^16.4.13",
     "@types/rimraf": "^3.0.2",
