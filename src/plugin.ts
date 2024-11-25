@@ -16,13 +16,15 @@ import { createRpcWorker } from './rpc';
 import { assertTypeScriptSupport } from './typescript/type-script-support';
 import type { GetDependenciesWorker } from './typescript/worker/get-dependencies-worker';
 import type { GetIssuesWorker } from './typescript/worker/get-issues-worker';
+import { readFileSync } from 'node:fs';
+
+const pkgJson = JSON.parse(readFileSync(path.join(__dirname, '../package.json'), 'utf-8'));
 
 class TsCheckerRspackPlugin {
   /**
    * Current version of the plugin
-   * TODO: use `define` to replace it
    */
-  static readonly version: string = '1.0.0-beta.1';
+  static readonly version: string = pkgJson.version;
   /**
    * Default pools for the plugin concurrency limit
    */
