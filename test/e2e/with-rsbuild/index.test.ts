@@ -1,7 +1,11 @@
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { expect, test } from '@playwright/test';
-import { createRsbuild as baseCreateRsbuild, type CreateRsbuildOptions } from '@rsbuild/core';
+import {
+  createRsbuild as baseCreateRsbuild,
+  mergeRsbuildConfig,
+  type CreateRsbuildOptions,
+} from '@rsbuild/core';
 import { webpackProvider } from '@rsbuild/webpack';
 import { pluginSwc } from '@rsbuild/plugin-webpack-swc';
 import { TsCheckerRspackPlugin } from '../../../lib';
@@ -14,24 +18,26 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
  * So we need to test the webpack compatibility.
  */
 const createRsbuild = async (config: CreateRsbuildOptions) => {
-  const { rsbuildConfig = {} } = config;
-  const { plugins = [] } = rsbuildConfig;
+  const rsbuildConfig = mergeRsbuildConfig(
+    config.rsbuildConfig,
+    { server: { port: getRandomPort() } },
+    process.env.WEBPACK
+      ? {
+          tools: {
+            webpack: config.rsbuildConfig?.tools?.rspack as any,
+          },
+          dev: {
+            progressBar: false,
+          },
+          provider: webpackProvider,
+          plugins: [pluginSwc()],
+        }
+      : {}
+  );
+
   return await baseCreateRsbuild({
     cwd: __dirname,
-    rsbuildConfig: {
-      ...rsbuildConfig,
-      server: {
-        ...rsbuildConfig.server,
-        port: getRandomPort(),
-      },
-      tools: {
-        ...rsbuildConfig.tools,
-        // @ts-expect-error
-        webpack: process.env.WEBPACK ? rsbuildConfig.tools?.rspack : undefined,
-      },
-      plugins: process.env.WEBPACK ? [pluginSwc(), ...plugins] : plugins,
-      provider: process.env.WEBPACK ? webpackProvider : undefined,
-    },
+    rsbuildConfig,
   });
 };
 
