@@ -35,10 +35,10 @@
   "dependencies": {
     "@babel/code-frame": "^7.16.7",
     "@rspack/lite-tapable": "^1.0.0",
-    "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "memfs": "^4.14.0",
     "minimatch": "^9.0.5",
+    "picocolors": "^1.1.1",
     "semver": "^7.3.5"
   },
   "peerDependencies": {
