@@ -35,7 +35,7 @@ importers:
         version: 27.5.1
       '@rspack/core':
         specifier: ^1.1.3
-        version: 1.1.3
+        version: 1.1.3(@swc/helpers@0.5.15)
       '@types/babel__code-frame':
         specifier: ^7.0.3
         version: 7.0.6
@@ -113,10 +113,10 @@ importers:
         version: 7.26.0(@babel/core@7.26.0)
       '@rspack/cli':
         specifier: ^1.1.3
-        version: 1.1.3(@rspack/core@1.1.3)(@types/express@4.17.21)(webpack@5.96.1)
+        version: 1.1.3(@rspack/core@1.1.3(@swc/helpers@0.5.15))(@types/express@4.17.21)(webpack@5.96.1)
       '@rspack/core':
         specifier: ^1.1.3
-        version: 1.1.3
+        version: 1.1.3(@swc/helpers@0.5.15)
       babel-loader:
         specifier: ^8.0.0
         version: 8.4.1(@babel/core@7.26.0)(webpack@5.96.1)
@@ -131,10 +131,10 @@ importers:
     devDependencies:
       '@rspack/cli':
         specifier: ^1.1.3
-        version: 1.1.3(@rspack/core@1.1.3)(@types/express@4.17.21)(webpack@5.96.1)
+        version: 1.1.3(@rspack/core@1.1.3(@swc/helpers@0.5.15))(@types/express@4.17.21)(webpack@5.96.1)
       '@rspack/core':
         specifier: ^1.1.3
-        version: 1.1.3
+        version: 1.1.3(@swc/helpers@0.5.15)
       ts-checker-rspack-plugin:
         specifier: workspace:*
         version: link:../..
@@ -145,23 +145,38 @@ importers:
         specifier: ^4.6.4
         version: 4.9.5
 
-  test/e2e/fixtures/type-definitions:
+  test/e2e:
+    devDependencies:
+      '@playwright/test':
+        specifier: ^1.49.0
+        version: 1.49.0
+      '@rsbuild/core':
+        specifier: ^1.1.4
+        version: 1.1.4
+      playwright:
+        specifier: ^1.49.0
+        version: 1.49.0
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
+
+  test/e2e-legacy/fixtures/type-definitions:
     devDependencies:
       '@rspack/core':
         specifier: ^1.1.3
-        version: 1.1.3
+        version: 1.1.3(@swc/helpers@0.5.15)
       typescript:
         specifier: ~4.9.0
         version: 4.9.5
 
-  test/e2e/fixtures/typescript-basic:
+  test/e2e-legacy/fixtures/typescript-basic:
     dependencies:
       '@rspack/cli':
         specifier: ^1.1.3
-        version: 1.1.3(@rspack/core@1.1.3)(@types/express@4.17.21)(webpack@5.96.1)
+        version: 1.1.3(@rspack/core@1.1.3(@swc/helpers@0.5.15))(@types/express@4.17.21)(webpack@5.96.1)
       '@rspack/core':
         specifier: ^1.1.3
-        version: 1.1.3
+        version: 1.1.3(@swc/helpers@0.5.15)
       ts-loader:
         specifier: ^5.0.0
         version: 5.4.5(typescript@3.9.10)
@@ -169,7 +184,7 @@ importers:
         specifier: ^3.8.0
         version: 3.9.10
 
-  test/e2e/fixtures/typescript-monorepo:
+  test/e2e-legacy/fixtures/typescript-monorepo:
     dependencies:
       '@babel/core':
         specifier: ^7.10.0
@@ -182,10 +197,10 @@ importers:
         version: 7.26.0(@babel/core@7.26.0)
       '@rspack/cli':
         specifier: ^1.1.3
-        version: 1.1.3(@rspack/core@1.1.3)(@types/express@4.17.21)(webpack@5.96.1)
+        version: 1.1.3(@rspack/core@1.1.3(@swc/helpers@0.5.15))(@types/express@4.17.21)(webpack@5.96.1)
       '@rspack/core':
         specifier: ^1.1.3
-        version: 1.1.3
+        version: 1.1.3(@swc/helpers@0.5.15)
       babel-loader:
         specifier: ^8.1.0
         version: 8.4.1(@babel/core@7.26.0)(webpack@5.96.1)
@@ -193,15 +208,15 @@ importers:
         specifier: ^3.8.0
         version: 3.9.10
 
-  test/e2e/fixtures/typescript-monorepo/packages/client:
+  test/e2e-legacy/fixtures/typescript-monorepo/packages/client:
     dependencies:
       '@project-references-fixture/shared':
         specifier: workspace:*
         version: link:../shared
 
-  test/e2e/fixtures/typescript-monorepo/packages/shared: {}
+  test/e2e-legacy/fixtures/typescript-monorepo/packages/shared: {}
 
-  test/e2e/fixtures/typescript-package/package: {}
+  test/e2e-legacy/fixtures/typescript-package/package: {}
 
 packages:
 
@@ -930,8 +945,18 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
+  '@playwright/test@1.49.0':
+    resolution: {integrity: sha512-DMulbwQURa8rNIQrf94+jPJQ4FmOVdpE5ZppRNvWVjvhC+6sOeo28r8MgIpQRYouXRtt/FCCXU7zn20jnHR4Qw==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
+
+  '@rsbuild/core@1.1.4':
+    resolution: {integrity: sha512-fN13hH6Ag0WgCCDUJErNvGs39hSePr8MTaJu1TjUZbFAY3DtOsUHhEb2V5zCUiaeMLMz7ef+krj7+duAJkizog==}
+    engines: {node: '>=16.7.0'}
+    hasBin: true
 
   '@rspack/binding-darwin-arm64@1.1.3':
     resolution: {integrity: sha512-gpLUBMDAS/uEcnE+ODy1ILTeyp1oM4QCq8rRhKHuOfsIe1AZ9Mct59v2omIE/r+R4dnbJ0ikIpto9qJZ6P2u1A==}
@@ -1010,6 +1035,9 @@ packages:
 
   '@sinonjs/fake-timers@8.1.0':
     resolution: {integrity: sha512-OAPJUAtgeINhh/TAlUID4QTs53Njm7xzddaVlEs/SXwgtiD1tW22zAB/W1wdqfrpmikgaWQ9Fw6Ws+hsiRm5Vg==}
+
+  '@swc/helpers@0.5.15':
+    resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
 
   '@tootallnate/once@1.1.2':
     resolution: {integrity: sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==}
@@ -1595,6 +1623,9 @@ packages:
   core-js-compat@3.39.0:
     resolution: {integrity: sha512-VgEUx3VwlExr5no0tXlBt+silBvhTryPwCXRI2Id1PN8WTKu7MreethvddqOubrYxkFdv/RnYrqlv1sFNAUelw==}
 
+  core-js@3.39.0:
+    resolution: {integrity: sha512-raM0ew0/jJUqkJ0E6e8UDtl+y/7ktFivgWvqw8dNSQeNWoSDLvQ1H/RN3aPXB9tBd4/FhyR4RDPGhsNIMsAn7g==}
+
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
 
@@ -1947,6 +1978,11 @@ packages:
 
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
+
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -2794,6 +2830,16 @@ packages:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
 
+  playwright-core@1.49.0:
+    resolution: {integrity: sha512-R+3KKTQF3npy5GTiKH/T+kdhoJfJojjHESR1YEWhYuEKRVfVaxH3+4+GvXE5xyCngCxhxnykk0Vlah9v8fs3jA==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.49.0:
+    resolution: {integrity: sha512-eKpmys0UFDnfNb3vfsf8Vx2LEOtflgRebl0Im2eQQnYMA4Aqd+Zw8bEOB+7ZKvN76901mRnqdsiOGKxzVTbi7A==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   posix-character-classes@0.1.1:
     resolution: {integrity: sha512-xTgYBc3fuo7Yt7JbiuFxSYGToMoz8fLoE6TC9Wx1P/u+LfeThMOAqmuyECnlBaaJb+u1m9hHiXUEtwW4OzfUJg==}
     engines: {node: '>=0.10.0'}
@@ -3345,6 +3391,11 @@ packages:
   typescript@4.9.5:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
+    hasBin: true
+
+  typescript@5.7.2:
+    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
+    engines: {node: '>=14.17'}
     hasBin: true
 
   unicode-canonical-property-names-ecmascript@2.0.1:
@@ -4575,7 +4626,18 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
+  '@playwright/test@1.49.0':
+    dependencies:
+      playwright: 1.49.0
+
   '@polka/url@1.0.0-next.28': {}
+
+  '@rsbuild/core@1.1.4':
+    dependencies:
+      '@rspack/core': 1.1.3(@swc/helpers@0.5.15)
+      '@rspack/lite-tapable': 1.0.1
+      '@swc/helpers': 0.5.15
+      core-js: 3.39.0
 
   '@rspack/binding-darwin-arm64@1.1.3':
     optional: true
@@ -4616,11 +4678,11 @@ snapshots:
       '@rspack/binding-win32-ia32-msvc': 1.1.3
       '@rspack/binding-win32-x64-msvc': 1.1.3
 
-  '@rspack/cli@1.1.3(@rspack/core@1.1.3)(@types/express@4.17.21)(webpack@5.96.1)':
+  '@rspack/cli@1.1.3(@rspack/core@1.1.3(@swc/helpers@0.5.15))(@types/express@4.17.21)(webpack@5.96.1)':
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@rspack/core': 1.1.3
-      '@rspack/dev-server': 1.0.9(@rspack/core@1.1.3)(@types/express@4.17.21)(webpack@5.96.1)
+      '@rspack/core': 1.1.3(@swc/helpers@0.5.15)
+      '@rspack/dev-server': 1.0.9(@rspack/core@1.1.3(@swc/helpers@0.5.15))(@types/express@4.17.21)(webpack@5.96.1)
       colorette: 2.0.19
       exit-hook: 4.0.0
       interpret: 3.1.1
@@ -4637,16 +4699,18 @@ snapshots:
       - webpack
       - webpack-cli
 
-  '@rspack/core@1.1.3':
+  '@rspack/core@1.1.3(@swc/helpers@0.5.15)':
     dependencies:
       '@module-federation/runtime-tools': 0.5.1
       '@rspack/binding': 1.1.3
       '@rspack/lite-tapable': 1.0.1
       caniuse-lite: 1.0.30001684
+    optionalDependencies:
+      '@swc/helpers': 0.5.15
 
-  '@rspack/dev-server@1.0.9(@rspack/core@1.1.3)(@types/express@4.17.21)(webpack@5.96.1)':
+  '@rspack/dev-server@1.0.9(@rspack/core@1.1.3(@swc/helpers@0.5.15))(@types/express@4.17.21)(webpack@5.96.1)':
     dependencies:
-      '@rspack/core': 1.1.3
+      '@rspack/core': 1.1.3(@swc/helpers@0.5.15)
       chokidar: 3.6.0
       connect-history-api-fallback: 2.0.0
       express: 4.21.1
@@ -4674,6 +4738,10 @@ snapshots:
   '@sinonjs/fake-timers@8.1.0':
     dependencies:
       '@sinonjs/commons': 1.8.6
+
+  '@swc/helpers@0.5.15':
+    dependencies:
+      tslib: 2.8.1
 
   '@tootallnate/once@1.1.2': {}
 
@@ -5370,6 +5438,8 @@ snapshots:
     dependencies:
       browserslist: 4.24.2
 
+  core-js@3.39.0: {}
+
   core-util-is@1.0.3: {}
 
   cross-env@7.0.3:
@@ -5724,6 +5794,9 @@ snapshots:
       universalify: 2.0.1
 
   fs.realpath@1.0.0: {}
+
+  fsevents@2.3.2:
+    optional: true
 
   fsevents@2.3.3:
     optional: true
@@ -6771,6 +6844,14 @@ snapshots:
     dependencies:
       find-up: 4.1.0
 
+  playwright-core@1.49.0: {}
+
+  playwright@1.49.0:
+    dependencies:
+      playwright-core: 1.49.0
+    optionalDependencies:
+      fsevents: 2.3.2
+
   posix-character-classes@0.1.1: {}
 
   prettier@2.8.8: {}
@@ -7344,6 +7425,8 @@ snapshots:
   typescript@3.9.10: {}
 
   typescript@4.9.5: {}
+
+  typescript@5.7.2: {}
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 

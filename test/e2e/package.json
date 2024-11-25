@@ -1,0 +1,13 @@
+{
+  "name": "test-e2e",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@rsbuild/core": "^1.1.4",
+    "playwright": "^1.49.0",
+    "typescript": "^5.7.2"
+  }
+}

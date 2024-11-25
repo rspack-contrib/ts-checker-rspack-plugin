@@ -26,7 +26,7 @@
     "lint": "echo lint",
     "test": "pnpm build && pnpm test:unit && pnpm test:e2e",
     "test:unit": "cross-env jest --config=test/unit/jest.config.js",
-    "test:e2e": "npm pack && cross-env jest --config=test/e2e/jest.config.js --ci -i -b",
+    "test:e2e": "cd test/e2e && pnpm test",
     "precommit": "pnpm build && pnpm test:unit",
     "prepare": "husky install && pnpm build",
     "bump": "npx bumpp"
