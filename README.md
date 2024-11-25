@@ -19,7 +19,7 @@ Big thanks to `fork-ts-checker-webpack-plugin` creators and contributors for the
 
 ## Installation
 
-This plugin requires **Node.js >=14.0.0+**, **Rspack ^1.0.0**, **TypeScript ^3.6.0**
+This plugin requires **Node.js >=16.0.0+**, **Rspack ^1.0.0**, **TypeScript ^3.8.0**
 
 ```sh
 # with npm
@@ -32,7 +32,7 @@ yarn add -D ts-checker-rspack-plugin
 pnpm add -D ts-checker-rspack-plugin
 ```
 
-The minimal webpack config (with [ts-loader](https://github.com/TypeStrong/ts-loader))
+The minimal Rspack config with [builtin:swc-loader](https://rspack.dev/guide/features/builtin-swc-loader).
 
 ```js
 // rspack.config.js
@@ -48,11 +48,14 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
-        // add transpileOnly option if you use ts-loader < 9.3.0
-        // options: {
-        //   transpileOnly: true
-        // }
+        loader: 'builtin:swc-loader',
+        options: {
+          jsc: {
+            parser: {
+              syntax: 'typescript',
+            },
+          },
+        },
       },
     ],
   },
@@ -65,9 +68,6 @@ module.exports = {
   },
 };
 ```
-
-> Examples how to configure it with [babel-loader](https://github.com/babel/babel-loader), [ts-loader](https://github.com/TypeStrong/ts-loader)
-> and [Visual Studio Code](https://code.visualstudio.com/) are in the [**examples**](./examples) directory.
 
 ## Modules resolution
 
