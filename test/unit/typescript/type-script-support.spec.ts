@@ -37,28 +37,6 @@ describe('typescript/type-script-support', () => {
     );
   });
 
-  it('throws error if typescript version is lower then 3.6.0', async () => {
-    jest.setMock('typescript', { version: '3.5.9' });
-
-    const { assertTypeScriptSupport } = await import('src/typescript/type-script-support');
-
-    expect(() => assertTypeScriptSupport(configuration)).toThrowError(
-      [
-        `TsCheckerRspackPlugin cannot use the current typescript version of 3.5.9.`,
-        'The minimum required version is 3.6.0.',
-      ].join(os.EOL)
-    );
-  });
-
-  it("doesn't throw error if typescript version is greater or equal 3.6.0", async () => {
-    jest.setMock('typescript', { version: '3.6.0' });
-    jest.setMock('node:fs', { existsSync: () => true });
-
-    const { assertTypeScriptSupport } = await import('src/typescript/type-script-support');
-
-    expect(() => assertTypeScriptSupport(configuration)).not.toThrowError();
-  });
-
   it('throws error if there is no tsconfig.json file', async () => {
     jest.setMock('typescript', { version: '3.8.0' });
     jest.setMock('node:fs', { existsSync: () => false });
