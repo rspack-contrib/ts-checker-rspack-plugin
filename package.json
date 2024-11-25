@@ -27,7 +27,7 @@
     "test": "pnpm build && pnpm test:unit && pnpm test:e2e",
     "test:unit": "cross-env jest --config=test/unit/jest.config.js",
     "test:e2e": "cd test/e2e && pnpm test",
-    "test:e2e:install": "cd test/e2e && playwright install chromium",
+    "test:e2e:setup": "cd test/e2e && pnpm run setup",
     "precommit": "pnpm build && pnpm test:unit",
     "prepare": "husky install && pnpm build",
     "bump": "npx bumpp"

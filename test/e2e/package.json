@@ -2,7 +2,8 @@
   "name": "test-e2e",
   "type": "module",
   "scripts": {
-    "test": "playwright test"
+    "test": "playwright test",
+    "setup": "playwright install chromium"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0",
