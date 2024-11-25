@@ -2,8 +2,14 @@
 
 Rspack plugin that runs TypeScript type checker on a separate process.
 
-[![npm version](https://img.shields.io/npm/v/ts-checker-rspack-plugin.svg)](https://www.npmjs.com/package/ts-checker-rspack-plugin)
-[![downloads](http://img.shields.io/npm/dm/ts-checker-rspack-plugin.svg)](https://npmjs.org/package/ts-checker-rspack-plugin)
+<p>
+  <a href="https://npmjs.com/package/ts-checker-rspack-plugin">
+   <img src="https://img.shields.io/npm/v/ts-checker-rspack-plugin?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" />
+  </a>
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="license" />
+  <a href="https://npmcharts.com/compare/ts-checker-rspack-plugin?minimal=true"><img src="https://img.shields.io/npm/dm/ts-checker-rspack-plugin.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="downloads" /></a>
+</p>
+
 
 ## Credits
 
@@ -165,10 +171,10 @@ When we call this method with a [Rspack compiler instance](https://rspack.dev/ap
 [tapable](https://github.com/webpack/tapable) hooks where you can pass in your callbacks.
 
 ```js
-// ./src/webpack/MyWebpackPlugin.js
+// ./src/rspack/MyRspackPlugin.js
 const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
 
-class MyWebpackPlugin {
+class MyRspackPlugin {
   apply(compiler) {
     const hooks = TsCheckerRspackPlugin.getCompilerHooks(compiler);
 
@@ -181,15 +187,15 @@ class MyWebpackPlugin {
   }
 }
 
-module.exports = MyWebpackPlugin;
+module.exports = MyRspackPlugin;
 
 // rspack.config.js
 const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
-const MyWebpackPlugin = require('./src/webpack/MyWebpackPlugin');
+const MyRspackPlugin = require('./src/webpack/MyRspackPlugin');
 
 module.exports = {
   /* ... */
-  plugins: [new TsCheckerRspackPlugin(), new MyWebpackPlugin()],
+  plugins: [new TsCheckerRspackPlugin(), new MyRspackPlugin()],
 };
 ```
 
