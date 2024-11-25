@@ -10,7 +10,6 @@ Rspack plugin that runs TypeScript type checker on a separate process.
   <a href="https://npmcharts.com/compare/ts-checker-rspack-plugin?minimal=true"><img src="https://img.shields.io/npm/dm/ts-checker-rspack-plugin.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="downloads" /></a>
 </p>
 
-
 ## Credits
 
 This plugin is forked from [TypeStrong/fork-ts-checker-webpack-plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin), which is created by [Piotr Oleś](https://github.com/piotr-oles). See the original project's [LICENSE](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/blob/main/LICENSE).
@@ -22,6 +21,8 @@ Big thanks to `fork-ts-checker-webpack-plugin` creators and contributors for the
 - Speeds up [TypeScript](https://github.com/Microsoft/TypeScript) type checking (by moving it to a separate process) 🏎
 - Supports modern TypeScript features like [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) and [incremental mode](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#faster-subsequent-builds-with-the---incremental-flag) ✨
 - Displays nice error messages with the [code frame](https://babeljs.io/docs/en/next/babel-code-frame.html) formatter 🌈
+
+💡 For Rsbuild projects, use [@rsbuild/plugin-type-check](https://github.com/rspack-contrib/rsbuild-plugin-type-check) to get out-of-the-box experience.
 
 ## Installation
 
@@ -191,7 +192,7 @@ module.exports = MyRspackPlugin;
 
 // rspack.config.js
 const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
-const MyRspackPlugin = require('./src/webpack/MyRspackPlugin');
+const MyRspackPlugin = require('./src/rspack/MyRspackPlugin');
 
 module.exports = {
   /* ... */
