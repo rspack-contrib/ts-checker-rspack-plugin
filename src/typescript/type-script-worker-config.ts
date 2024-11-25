@@ -40,7 +40,7 @@ function createTypeScriptWorkerConfig(
 
   return {
     enabled: Boolean(options) || options === undefined,
-    memoryLimit: 2048,
+    memoryLimit: 8192,
     build: false,
     mode: optionsAsObject.build ? 'write-tsbuildinfo' : 'readonly',
     profile: false,

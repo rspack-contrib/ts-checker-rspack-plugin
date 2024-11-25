@@ -21,7 +21,7 @@ describe('typescript/type-script-support', () => {
         syntactic: false,
       },
       enabled: true,
-      memoryLimit: 2048,
+      memoryLimit: 8192,
       profile: false,
       typescriptPath: require.resolve('typescript'),
     };
