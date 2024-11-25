@@ -10,7 +10,7 @@ describe('typescript/type-scripts-worker-config', () => {
 
   const configuration: TypeScriptWorkerConfig = {
     enabled: true,
-    memoryLimit: 2048,
+    memoryLimit: 8192,
     configFile: path.normalize(path.resolve(context, 'tsconfig.json')),
     configOverwrite: {},
     context: path.normalize(path.dirname(path.resolve(context, 'tsconfig.json'))),
