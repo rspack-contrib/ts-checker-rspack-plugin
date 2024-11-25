@@ -1,7 +1,15 @@
 name: CI/CD
-on: [push, pull_request]
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -30,6 +38,5 @@ jobs:
     - name: Run unit tests
       run: pnpm test:unit
 
-    # TODO
-    # - name: Run e2e tests
-    #   run: pnpm test:e2e
+    - name: Run e2e tests
+      run: pnpm test:e2e:setup && pnpm test:e2e
