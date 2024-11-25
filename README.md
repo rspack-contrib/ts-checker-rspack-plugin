@@ -1,4 +1,4 @@
-# TS Checker Rspack Plugin
+# ts-checker-rspack-plugin
 
 Rspack plugin that runs TypeScript type checker on a separate process.
 
