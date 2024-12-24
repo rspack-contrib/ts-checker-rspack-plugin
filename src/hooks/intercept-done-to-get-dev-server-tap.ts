@@ -14,9 +14,9 @@ function interceptDoneToGetDevServerTap(
   // inspired by https://github.com/ypresto/fork-ts-checker-async-overlay-webpack-plugin
   compiler.hooks.done.intercept({
     register: (tap) => {
-      if (tap.name === 'webpack-dev-server' && tap.type === 'sync' && config.devServer) {
-        debug('Intercepting webpack-dev-server tap.');
-        state.webpackDevServerDoneTap = tap;
+      if (['webpack-dev-server', 'rsbuild-dev-server'].includes(tap.name) && tap.type === 'sync' && config.devServer) {
+        debug('Intercepting dev-server tap.');
+        state.DevServerDoneTap = tap;
       }
       return tap;
     },
