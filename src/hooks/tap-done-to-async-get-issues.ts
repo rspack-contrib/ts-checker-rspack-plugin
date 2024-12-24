@@ -88,7 +88,7 @@ function tapDoneToAsyncGetIssues(
         }
       });
 
-      debug('Sending issues to the webpack-dev-server.');
+      debug('Sending issues to the dev-server.');
       state.DevServerDoneTap.fn(stats);
     }
   });
