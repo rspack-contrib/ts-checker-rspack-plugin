@@ -71,9 +71,9 @@ function tapDoneToAsyncGetIssues(
       config.logger.log(pc.green('No errors found.'));
     }
 
-    // report issues to webpack-dev-server, if it's listening
+    // report issues to dev-server (overlay), if it's listening
     // skip reporting if there are no issues, to avoid an extra hot reload
-    if (issues.length && state.webpackDevServerDoneTap) {
+    if (issues.length && state.DevServerDoneTap) {
       issues.forEach((issue) => {
         const error = new IssueWebpackError(
           config.formatter.format(issue),
@@ -89,7 +89,7 @@ function tapDoneToAsyncGetIssues(
       });
 
       debug('Sending issues to the webpack-dev-server.');
-      state.webpackDevServerDoneTap.fn(stats);
+      state.DevServerDoneTap.fn(stats);
     }
   });
 }

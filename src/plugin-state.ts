@@ -11,7 +11,7 @@ interface TsCheckerRspackPluginState {
   watching: boolean;
   initialized: boolean;
   iteration: number;
-  webpackDevServerDoneTap: any | undefined;
+  DevServerDoneTap: any | undefined;
 }
 
 function createPluginState(): TsCheckerRspackPluginState {
@@ -24,7 +24,7 @@ function createPluginState(): TsCheckerRspackPluginState {
     watching: false,
     initialized: false,
     iteration: 0,
-    webpackDevServerDoneTap: undefined,
+    DevServerDoneTap: undefined,
   };
 }
 
