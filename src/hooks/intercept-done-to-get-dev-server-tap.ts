@@ -15,7 +15,7 @@ function interceptDoneToGetDevServerTap(
   compiler.hooks.done.intercept({
     register: (tap) => {
       if (['webpack-dev-server', 'rsbuild-dev-server'].includes(tap.name) && tap.type === 'sync' && config.devServer) {
-        debug('Intercepting rsbuild-dev-server tap.');
+        debug('Intercepting dev-server tap.');
         state.DevServerDoneTap = tap;
       }
       return tap;
