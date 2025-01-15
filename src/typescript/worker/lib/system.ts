@@ -32,7 +32,7 @@ export interface ControlledTypeScriptSystem extends ts.System {
     recursive?: boolean,
     options?: ts.WatchOptions
   ): ts.FileWatcher;
-  getModifiedTime(path: string): Date | undefined;
+  getModifiedTime(path: string | undefined): Date | undefined;
   setModifiedTime(path: string, time: Date): void;
   deleteFile(path: string): void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -113,9 +113,12 @@ export const system: ControlledTypeScriptSystem = {
       )
       .map((dirent) => dirent.name);
   },
-  getModifiedTime(path: string): Date | undefined {
-    const stats = getReadFileSystem(path).readStats(path);
+  getModifiedTime(path: string | undefined): Date | undefined {
+    if (path === undefined) {
+      return undefined;
+    }
 
+    const stats = getReadFileSystem(path).readStats(path);
     if (stats) {
       return stats.mtime;
     }
