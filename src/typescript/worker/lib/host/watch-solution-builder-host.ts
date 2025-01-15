@@ -45,7 +45,7 @@ export function createWatchSolutionBuilderHost<TProgram extends ts.BuilderProgra
     writeFile(path: string, data: string): void {
       system.writeFile(path, data);
     },
-    getModifiedTime(fileName: string): Date | undefined {
+    getModifiedTime(fileName: string | undefined): Date | undefined {
       return system.getModifiedTime(fileName);
     },
     setModifiedTime(fileName: string, date: Date): void {
