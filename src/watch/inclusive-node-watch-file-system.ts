@@ -1,4 +1,4 @@
-import { extname } from 'path';
+import path, { extname } from 'path';
 
 import type { FSWatcher } from 'chokidar';
 import chokidar from 'chokidar';
@@ -21,10 +21,17 @@ export function createIsIgnored(
 ): (path: string) => boolean {
   const ignoredPatterns = ignored ? (Array.isArray(ignored) ? ignored : [ignored]) : [];
 
-  const filteredExcluded = excluded.filter((path) => {
+  const filteredExcluded = excluded.filter((pattern) => {
     // Use `minimatch` to check if the path is a glob pattern.
-    if (isGlob(path)) {
-      ignoredPatterns.push(path);
+    if (isGlob(pattern)) {
+      // Append `/**` to the pattern to align minimatch's behavior
+      // with the `exclude` option in tsconfig.json.
+      const shouldAppendStar = pattern.includes('**') && !pattern.endsWith('*');
+      if (shouldAppendStar) {
+        ignoredPatterns.push(pattern.endsWith('/') ? `${pattern}**` : `${pattern}/**`);
+      } else {
+        ignoredPatterns.push(pattern);
+      }
       return false;
     }
     return true;
