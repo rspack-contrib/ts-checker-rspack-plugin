@@ -68,7 +68,7 @@ function tapDoneToAsyncGetIssues(
       // print stats of the compilation
       config.logger.log(statsFormatter(issues, stats));
     } else {
-      config.logger.log(pc.green('No errors found.'));
+      config.logger.log(pc.green('No TypeScript errors found.'));
     }
 
     // report issues to dev-server (overlay), if it's listening
