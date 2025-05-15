@@ -14,7 +14,7 @@ import type { WatchFileSystem } from './watch-file-system';
 
 const BUILTIN_IGNORED_DIRS = ['.git'];
 
-function createIsIgnored(
+export function createIsIgnored(
   ignored: string | RegExp | (string | RegExp)[] | undefined,
   excluded: string[]
 ): (path: string) => boolean {
