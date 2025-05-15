@@ -3,6 +3,7 @@ import { extname } from 'path';
 import type { FSWatcher } from 'chokidar';
 import chokidar from 'chokidar';
 import { minimatch } from 'minimatch';
+import isGlob from 'is-glob';
 import type { Compiler } from '@rspack/core';
 
 import { clearFilesChange, updateFilesChange } from '../files-change';
@@ -19,6 +20,16 @@ export function createIsIgnored(
   excluded: string[]
 ): (path: string) => boolean {
   const ignoredPatterns = ignored ? (Array.isArray(ignored) ? ignored : [ignored]) : [];
+
+  const filteredExcluded = excluded.filter((path) => {
+    // Use `minimatch` to check if the path is a glob pattern.
+    if (isGlob(path)) {
+      ignoredPatterns.push(path);
+      return false;
+    }
+    return true;
+  });
+
   const ignoredFunctions = ignoredPatterns.map((pattern) => {
     // ensure patterns are valid - see https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/issues/594
     if (typeof pattern === 'string') {
@@ -30,9 +41,11 @@ export function createIsIgnored(
       return () => false;
     }
   });
+
   ignoredFunctions.push((path: string) =>
-    excluded.some((excludedPath) => isInsideAnotherPath(excludedPath, path))
+    filteredExcluded.some((excludedPath) => isInsideAnotherPath(excludedPath, path))
   );
+
   ignoredFunctions.push((path: string) =>
     BUILTIN_IGNORED_DIRS.some(
       (ignoredDir) => path.includes(`/${ignoredDir}/`) || path.includes(`\\${ignoredDir}\\`)
