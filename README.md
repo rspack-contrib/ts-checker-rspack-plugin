@@ -42,11 +42,10 @@ pnpm add -D ts-checker-rspack-plugin
 The minimal Rspack config with [builtin:swc-loader](https://rspack.dev/guide/features/builtin-swc-loader).
 
 ```js
-// rspack.config.js
-const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
+// rspack.config.mjs
+import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
 
-module.exports = {
-  context: __dirname, // to automatically find tsconfig.json
+export default {
   entry: './src/index.ts',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
@@ -67,12 +66,17 @@ module.exports = {
     ],
   },
   plugins: [new TsCheckerRspackPlugin()],
-  watchOptions: {
-    // for some systems, watching many files can result in a lot of CPU or memory usage
-    // https://rspack.dev/config/watch#watchoptionsignored
-    // don't use this pattern, if you have a monorepo with linked packages
-    ignored: /node_modules/,
-  },
+};
+```
+
+If you are using CommonJS:
+
+```js
+// rspack.config.js
+const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
+
+module.exports = {
+  plugins: [new TsCheckerRspackPlugin()],
 };
 ```
 
@@ -94,7 +98,7 @@ Rspack's modules resolution**. It means that you have to setup `tsconfig.json` c
 | `issue`      | `object`                                                         | `{}`                                      | See [Issues options](#issues-options).                                                                                                                                                                                                                                                                            |
 | `formatter`  | `string` or `object` or `function`                               | `codeframe`                               | Available formatters are `basic`, `codeframe` and a custom `function`. To [configure](https://babeljs.io/docs/en/babel-code-frame#options) `codeframe` formatter, pass: `{ type: 'codeframe', options: { <coderame options> } }`. To use absolute file path, pass: `{ type: 'codeframe', pathType: 'absolute' }`. |
 | `logger`     | `{ log: function, error: function }` or `webpack-infrastructure` | `console`                                 | Console-like object to print issues in `async` mode.                                                                                                                                                                                                                                                              |
-| `devServer`  | `boolean`                                                        | `true`                                    | If set to `false`, errors will not be reported to Dev Server and displayed in the error overlay.                                                                                                                                                                                                                                                     |
+| `devServer`  | `boolean`                                                        | `true`                                    | If set to `false`, errors will not be reported to Dev Server and displayed in the error overlay.                                                                                                                                                                                                                  |
 
 ### TypeScript options
 
