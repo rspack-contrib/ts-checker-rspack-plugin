@@ -19,7 +19,7 @@ export function createIsIgnored(
   ignored: string | RegExp | (string | RegExp)[] | undefined,
   excluded: string[]
 ): (path: string) => boolean {
-  const ignoredPatterns = ignored ? (Array.isArray(ignored) ? ignored : [ignored]) : [];
+  const ignoredPatterns = ignored ? (Array.isArray(ignored) ? [...ignored] : [ignored]) : [];
 
   const filteredExcluded = excluded.filter((pattern) => {
     // Use `minimatch` to check if the path is a glob pattern.
