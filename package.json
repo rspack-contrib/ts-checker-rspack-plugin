@@ -37,7 +37,7 @@
     "@rspack/lite-tapable": "^1.0.1",
     "chokidar": "^3.6.0",
     "is-glob": "^4.0.3",
-    "memfs": "^4.17.2",
+    "memfs": "^4.28.0",
     "minimatch": "^9.0.5",
     "picocolors": "^1.1.1"
   },
@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@jest/console": "^27.5.1",
-    "@rspack/core": "^1.4.4",
+    "@rspack/core": "^1.4.11",
     "@types/babel__code-frame": "^7.0.6",
     "@types/is-glob": "^4.0.4",
     "@types/jest": "^27.5.2",
