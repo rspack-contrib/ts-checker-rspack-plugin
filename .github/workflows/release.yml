@@ -10,29 +10,30 @@ on:
   workflow_dispatch:
 
 permissions:
-  # Provenance generation in GitHub Actions requires "write" access to the "id-token"
-  id-token: write
-  # `ncipollo/release-action` requires "write" access to the "contents"
   contents: write
+  id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: production
+    environment: npm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Install Pnpm
-        run: |
-          npm install -g corepack@latest --force
-          corepack enable
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "pnpm"
+
+      # Update npm to the latest version to enable OIDC
+      # Use corepack to install pnpm
+      - name: Setup Package Managers
+        run: |
+          npm install -g npm@latest
+          npm --version
+          npm install -g corepack@latest --force
+          corepack enable
 
       - name: Install Dependencies
         run: pnpm install
@@ -40,7 +41,7 @@ jobs:
       - name: Publish
         uses: JS-DevTools/npm-publish@v3
         with:
-          token: ${{ secrets.TS_CHECKER_RSPACK_PLUGIN_NPM_TOKEN }}
+          token: empty
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
