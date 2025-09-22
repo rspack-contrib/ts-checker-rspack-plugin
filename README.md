@@ -222,6 +222,22 @@ setting "generateTrace" compiler option. This is an instruction from [microsoft/
 
 You must both set "incremental": true in your `tsconfig.json` (under `compilerOptions`) and also specify mode: 'write-references' in `TsCheckerRspackPlugin` settings.
 
+## Vue components
+
+To enable typecheck in `.vue` files, use the custom TypeScript wrapper [`@esctn/vue-tsc-api`](https://www.npmjs.com/package/@esctn/vue-tsc-api). It works on top of [`vue-tsc`](https://www.npmjs.com/package/vue-tsc) — a popular CLI tool for type-checking Vue 3 code.
+
+```bash
+npm add @esctn/vue-tsc-api -D
+```
+
+```js
+new TsCheckerRspackPlugin({
+  typescript: {
+    typescriptPath: '@esctn/vue-tsc-api',
+  },
+});
+```
+
 ## License
 
 MIT License
