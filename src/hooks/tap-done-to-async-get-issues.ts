@@ -32,7 +32,7 @@ function tapDoneToAsyncGetIssues(
     try {
       if (await isPending(issuesPromise)) {
         hooks.waiting.call(stats.compilation);
-        config.logger.log(pc.cyan('[type-check] starting...'));
+        config.logger.log(pc.cyan('[type-check] in progress...'));
       } else {
         // wait 10ms to log issues after webpack stats
         await wait(10);
