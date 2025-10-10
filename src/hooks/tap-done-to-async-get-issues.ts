@@ -1,4 +1,4 @@
-import pc from 'picocolors';;
+import pc from 'picocolors';
 import type * as rspack from '@rspack/core';
 
 import { statsFormatter } from '../formatter/stats-formatter';
@@ -32,7 +32,7 @@ function tapDoneToAsyncGetIssues(
     try {
       if (await isPending(issuesPromise)) {
         hooks.waiting.call(stats.compilation);
-        config.logger.log(pc.cyan('Type-checking in progress...'));
+        config.logger.log(pc.cyan('[type-check] starting...'));
       } else {
         // wait 10ms to log issues after webpack stats
         await wait(10);
@@ -64,12 +64,10 @@ function tapDoneToAsyncGetIssues(
     if (issues.length) {
       // follow webpack's approach - one process.write to stderr with all errors and warnings
       config.logger.error(issues.map((issue) => formatter(issue)).join('\n'));
-
-      // print stats of the compilation
-      config.logger.log(statsFormatter(issues, stats));
-    } else {
-      config.logger.log(pc.green('No TypeScript errors found.'));
     }
+
+    // print stats of the compilation
+    config.logger.log(statsFormatter(issues, stats));
 
     // report issues to dev-server (overlay), if it's listening
     // skip reporting if there are no issues, to avoid an extra hot reload
