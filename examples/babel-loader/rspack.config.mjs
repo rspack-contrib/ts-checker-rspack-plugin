@@ -1,7 +1,6 @@
-const { TsCheckerRspackPlugin } = require('ts-checker-rspack-plugin');
+import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
 
-module.exports = {
-  context: __dirname,
+export default {
   entry: './src/index.ts',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
@@ -10,7 +9,7 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        loader: 'babel-loader',
       },
     ],
   },

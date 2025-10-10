@@ -15,12 +15,15 @@ export function statsFormatter(issues: Issue[], stats: Stats): string {
     : '';
   const timeFormatted = stats.startTime ? Math.round(Date.now() - stats.startTime) : 0;
 
+  if (!errorsFormatted && !warningsFormatted) {
+    return pc.green(`[type-check] no errors found in ${timeFormatted} ms`);
+  }
+
   return [
-    'Found ',
+    '[type-check] found ',
     errorsFormatted,
     errorsFormatted && warningsFormatted ? ' and ' : '',
     warningsFormatted,
     timeFormatted ? ` in ${timeFormatted} ms` : '',
-    '.',
   ].join('');
 }
