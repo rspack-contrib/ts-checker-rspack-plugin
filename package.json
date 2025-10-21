@@ -59,7 +59,7 @@
     "@types/mock-fs": "^4.13.4",
     "@types/node": "^16.18.126",
     "cross-env": "^10.1.0",
-    "husky": "^7.0.4",
+    "husky": "^9.1.7",
     "jest": "^27.5.1",
     "jest-circus": "^27.5.1",
     "jest-environment-node": "^27.5.1",
