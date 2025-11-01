@@ -187,7 +187,7 @@ class InclusiveNodeWatchFileSystem implements WatchFileSystem {
         this.deletedFiles.delete(file);
         updateFilesChange(this.compiler, { changedFiles: [file] });
 
-        this.watcher?._onChange(dirToWatch, stats?.mtimeMs || stats?.ctimeMs || 1, file, 'rename');
+        this.watcher?._onChange(file, stats?.mtimeMs || stats?.ctimeMs || 1, file, 'rename');
       });
       dirWatcher.on('unlink', (file) => {
         if (this.paused) {
