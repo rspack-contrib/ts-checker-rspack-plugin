@@ -22,7 +22,8 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "cross-env rimraf lib && cross-env tsc --version && cross-env tsc",
+    "build": "rslib build",
+    "dev": "rslib build -w",
     "lint": "echo lint",
     "test": "pnpm build && pnpm test:unit && pnpm test:e2e",
     "test:unit": "cross-env jest --config=test/unit/jest.config.js",
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "@jest/console": "^27.5.1",
+    "@rslib/core": "^0.17.0",
     "@rspack/core": "^1.6.0",
     "@types/babel__code-frame": "^7.0.6",
     "@types/is-glob": "^4.0.4",
