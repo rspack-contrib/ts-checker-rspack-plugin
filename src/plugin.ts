@@ -52,12 +52,12 @@ class TsCheckerRspackPlugin {
 
     assertTypeScriptSupport(config.typescript);
     const getIssuesWorker = createRpcWorker<GetIssuesWorker>(
-      path.resolve(__dirname, './typescript/worker/get-issues-worker.js'),
+      path.resolve(__dirname, './getIssuesWorker.js'),
       config.typescript,
       config.typescript.memoryLimit
     );
     const getDependenciesWorker = createRpcWorker<GetDependenciesWorker>(
-      path.resolve(__dirname, './typescript/worker/get-dependencies-worker.js'),
+      path.resolve(__dirname, './getDependenciesWorker.js'),
       config.typescript
     );
 
