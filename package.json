@@ -67,7 +67,7 @@
     "jest-environment-node": "^27.5.1",
     "jest-runner": "^27.5.1",
     "mock-fs": "^5.5.0",
-    "prettier": "^2.8.8",
+    "prettier": "^3.6.2",
     "strip-ansi": "^6.0.1",
     "ts-jest": "^27.1.5",
     "typescript": "^5.9.3"
