@@ -76,5 +76,5 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "packageManager": "pnpm@9.15.9"
+  "packageManager": "pnpm@10.20.0"
 }
