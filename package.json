@@ -30,7 +30,7 @@
     "test:e2e": "cd test/e2e && pnpm test",
     "test:e2e:setup": "cd test/e2e && pnpm run setup",
     "precommit": "pnpm build && pnpm test:unit",
-    "prepare": "husky install && pnpm build",
+    "prepare": "husky && pnpm build",
     "bump": "npx bumpp"
   },
   "dependencies": {
