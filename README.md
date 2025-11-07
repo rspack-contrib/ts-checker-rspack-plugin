@@ -220,7 +220,27 @@ setting "generateTrace" compiler option. This is an instruction from [microsoft/
 
 ## Enabling incremental mode
 
-You must both set "incremental": true in your `tsconfig.json` (under `compilerOptions`) and also specify mode: 'write-references' in `TsCheckerRspackPlugin` settings.
+You must both set `"compilerOptions.incremental": true` in your `tsconfig.json` and also specify `mode: 'write-references'` in `TsCheckerRspackPlugin` settings.
+
+- `tsconfig.json`:
+
+```diff
+{
+  "compilerOptions": {
++   "incremental": true,
+  }
+}
+```
+
+- `TsCheckerRspackPlugin` settings:
+
+```js
+new TsCheckerRspackPlugin({
+  typescript: {
+    mode: 'write-references',
+  },
+});
+```
 
 ## Vue components
 
