@@ -220,7 +220,7 @@ setting "generateTrace" compiler option. This is an instruction from [microsoft/
 
 ## Enabling incremental mode
 
-You must both set `"compilerOptions.incremental": true` in your `tsconfig.json` and also specify `mode: 'write-references'` in `TsCheckerRspackPlugin` settings.
+You must both set `"compilerOptions.incremental": true` in your `tsconfig.json` and also specify `build: true` in `TsCheckerRspackPlugin` settings.
 
 - `tsconfig.json`:
 
@@ -237,7 +237,7 @@ You must both set `"compilerOptions.incremental": true` in your `tsconfig.json` 
 ```js
 new TsCheckerRspackPlugin({
   typescript: {
-    mode: 'write-references',
+    build: true,
   },
 });
 ```
