@@ -119,18 +119,25 @@ Options for the TypeScript checker (`typescript` option object).
 ### Issues options
 
 Options for the issues filtering (`issue` option object).
-I could write some plain text explanation of these options but I think code will explain it better:
+
+- **Type**:
 
 ```typescript
+interface IssueOptions {
+  include?: IssuePredicateOption;
+  exclude?: IssuePredicateOption;
+}
+
 interface Issue {
   severity: 'error' | 'warning';
   code: string;
+  // file field supports glob matching
   file?: string;
 }
 
-type IssueMatch = Partial<Issue>; // file field supports glob matching
+type IssueMatch = Partial<Issue>;
 type IssuePredicate = (issue: Issue) => boolean;
-type IssueFilter = IssueMatch | IssuePredicate | (IssueMatch | IssuePredicate)[];
+type IssuePredicateOption = IssuePredicate | IssueMatch | (IssuePredicate | IssueMatch)[];
 ```
 
 | Name      | Type          | Default value | Description                                                                                                                                                |
@@ -138,26 +145,28 @@ type IssueFilter = IssueMatch | IssuePredicate | (IssueMatch | IssuePredicate)[]
 | `include` | `IssueFilter` | `undefined`   | If `object`, defines issue properties that should be [matched](src/issue/issue-match.ts). If `function`, acts as a predicate where `issue` is an argument. |
 | `exclude` | `IssueFilter` | `undefined`   | Same as `include` but issues that match this predicate will be excluded.                                                                                   |
 
-<details>
-<summary>Expand example</summary>
+- **Example**:
 
 Include issues from the `src` directory, exclude issues from `.spec.ts` files:
 
 ```js
-module.exports = {
-  // ...the Rspack configuration
-  plugins: [
-    new TsCheckerRspackPlugin({
-      issue: {
-        include: [{ file: '**/src/**/*' }],
-        exclude: [{ file: '**/*.spec.ts' }],
-      },
-    }),
-  ],
-};
+new TsCheckerRspackPlugin({
+  issue: {
+    include: [{ file: '**/src/**/*' }],
+    exclude: [{ file: '**/*.spec.ts' }],
+  },
+});
 ```
 
-</details>
+Exclude files under `/node_modules/` using `file:`:
+
+```js
+new TsCheckerRspackPlugin({
+  issue: {
+    exclude: [({ file = '' }) => /[\\/]some-folder[\\/]/.test(file)],
+  },
+});
+```
 
 ## Plugin hooks
 
