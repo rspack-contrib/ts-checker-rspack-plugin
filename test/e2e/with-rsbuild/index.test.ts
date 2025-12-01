@@ -32,7 +32,7 @@ const createRsbuild = async (config: CreateRsbuildOptions) => {
           provider: webpackProvider,
           plugins: [pluginSwc()],
         }
-      : {}
+      : {},
   );
 
   return await baseCreateRsbuild({
@@ -60,8 +60,8 @@ test('should throw error when exist type errors', async () => {
 
   expect(
     logs.find((log) =>
-      log.includes(`Argument of type 'string' is not assignable to parameter of type 'number'.`)
-    )
+      log.includes(`Argument of type 'string' is not assignable to parameter of type 'number'.`),
+    ),
   ).toBeTruthy();
 
   restore();
@@ -92,8 +92,8 @@ test('should throw error when exist type errors in dev mode', async ({ page }) =
 
   expect(
     logs.find((log) =>
-      log.includes(`Argument of type 'string' is not assignable to parameter of type 'number'.`)
-    )
+      log.includes(`Argument of type 'string' is not assignable to parameter of type 'number'.`),
+    ),
   ).toBeTruthy();
 
   restore();
@@ -118,6 +118,32 @@ test('should not throw error when the file is excluded', async () => {
   });
 
   await expect(rsbuild.build()).resolves.toBeTruthy();
+});
+
+test('should downgrade type errors to warnings when defaultSeverity is warning', async () => {
+  const rsbuild = await createRsbuild({
+    rsbuildConfig: {
+      tools: {
+        rspack: {
+          plugins: [
+            new TsCheckerRspackPlugin({
+              async: false,
+              issue: {
+                defaultSeverity: 'warning',
+              },
+            }),
+          ],
+        },
+      },
+    },
+  });
+
+  const { stats } = await rsbuild.build();
+  const statsJson = stats?.toJson('errors-warnings') || {};
+  expect(statsJson.warnings?.[0]?.message).toContain(
+    `Argument of type 'string' is not assignable to parameter of type 'number'`,
+  );
+  expect(statsJson.errors?.length).toEqual(0);
 });
 
 test('should not throw error when the file is excluded by code', async () => {

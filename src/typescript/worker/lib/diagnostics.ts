@@ -2,7 +2,7 @@ import * as os from 'os';
 
 import type * as ts from 'typescript';
 
-import type { Issue, IssueLocation } from '../../../issue';
+import type { Issue, IssueDefaultSeverity, IssueLocation } from '../../../issue';
 import { deduplicateAndSortIssues } from '../../../issue';
 
 import { typescript } from './typescript';
@@ -14,14 +14,14 @@ export function updateDiagnostics(configFile: string, diagnostics: ts.Diagnostic
   diagnosticsPerConfigFile.set(configFile, diagnostics);
 }
 
-export function getIssues(): Issue[] {
+export function getIssues(defaultSeverity: IssueDefaultSeverity): Issue[] {
   const allDiagnostics: ts.Diagnostic[] = [];
 
   diagnosticsPerConfigFile.forEach((diagnostics) => {
     allDiagnostics.push(...diagnostics);
   });
 
-  return createIssuesFromDiagnostics(allDiagnostics);
+  return createIssuesFromDiagnostics(allDiagnostics, defaultSeverity);
 }
 
 export function invalidateDiagnostics(): void {
@@ -59,7 +59,10 @@ ${e.stack}`,
   return programDiagnostics;
 }
 
-function createIssueFromDiagnostic(diagnostic: ts.Diagnostic): Issue {
+function createIssueFromDiagnostic(
+  diagnostic: ts.Diagnostic,
+  defaultSeverity: IssueDefaultSeverity,
+): Issue {
   let file: string | undefined;
   let location: IssueLocation | undefined;
 
@@ -85,18 +88,28 @@ function createIssueFromDiagnostic(diagnostic: ts.Diagnostic): Issue {
     }
   }
 
+  const getSeverity = () => {
+    if (defaultSeverity === 'auto') {
+      // we don't handle Suggestion and Message diagnostics
+      return diagnostic.category === 0 ? 'warning' : 'error';
+    }
+    return defaultSeverity;
+  };
+
   return {
     code: 'TS' + String(diagnostic.code),
-    // we don't handle Suggestion and Message diagnostics
-    severity: diagnostic.category === 0 ? 'warning' : 'error',
+    severity: getSeverity(),
     message: typescript.flattenDiagnosticMessageText(diagnostic.messageText, os.EOL),
     file,
     location,
   };
 }
 
-export function createIssuesFromDiagnostics(diagnostics: ts.Diagnostic[]): Issue[] {
+export function createIssuesFromDiagnostics(
+  diagnostics: ts.Diagnostic[],
+  defaultSeverity: IssueDefaultSeverity,
+): Issue[] {
   return deduplicateAndSortIssues(
-    diagnostics.map((diagnostic) => createIssueFromDiagnostic(diagnostic))
+    diagnostics.map((diagnostic) => createIssueFromDiagnostic(diagnostic, defaultSeverity)),
   );
 }

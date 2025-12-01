@@ -4,7 +4,7 @@ import type * as ts from 'typescript';
 
 import type { FilesChange } from '../../../files-change';
 import type { FilesMatch } from '../../../files-match';
-import type { Issue } from '../../../issue';
+import type { Issue, IssueDefaultSeverity } from '../../../issue';
 import { forwardSlash } from '../../../utils/path/forward-slash';
 import type { TypeScriptConfigOverwrite } from '../../type-script-config-overwrite';
 
@@ -84,25 +84,25 @@ function applyConfigOverwrite(
 
 export function parseConfig(
   configFileName: string,
-  configFileContext: string
+  configFileContext: string,
 ): ts.ParsedCommandLine {
   const configFilePath = forwardSlash(configFileName);
 
   const { config: baseConfig, error: readConfigError } = typescript.readConfigFile(
     configFilePath,
-    parseConfigFileHost.readFile
+    parseConfigFileHost.readFile,
   );
 
   const overwrittenConfig = applyConfigOverwrite(
     baseConfig || {},
     getImplicitConfigOverwrite(),
-    getUserProvidedConfigOverwrite()
+    getUserProvidedConfigOverwrite(),
   );
 
   const parsedConfigFile = typescript.parseJsonConfigFileContent(
     overwrittenConfig,
     parseConfigFileHost,
-    configFileContext
+    configFileContext,
   );
 
   return {
@@ -115,8 +115,8 @@ export function parseConfig(
   };
 }
 
-export function getParseConfigIssues(): Issue[] {
-  const issues = createIssuesFromDiagnostics(parseConfigDiagnostics);
+export function getParseConfigIssues(defaultSeverity: IssueDefaultSeverity): Issue[] {
+  const issues = createIssuesFromDiagnostics(parseConfigDiagnostics, defaultSeverity);
 
   issues.forEach((issue) => {
     if (!issue.file) {
@@ -168,13 +168,13 @@ export function didConfigFileChanged({ changedFiles = [], deletedFiles = [] }: F
 
 export function didDependenciesProbablyChanged(
   dependencies: FilesMatch,
-  { changedFiles = [], deletedFiles = [] }: FilesChange
+  { changedFiles = [], deletedFiles = [] }: FilesChange,
 ) {
   const didSomeDependencyHasBeenAdded = changedFiles.some(
-    (changeFile) => !dependencies.files.includes(changeFile)
+    (changeFile) => !dependencies.files.includes(changeFile),
   );
   const didSomeDependencyHasBeenDeleted = deletedFiles.some((deletedFile) =>
-    dependencies.files.includes(deletedFile)
+    dependencies.files.includes(deletedFile),
   );
 
   return didSomeDependencyHasBeenAdded || didSomeDependencyHasBeenDeleted;

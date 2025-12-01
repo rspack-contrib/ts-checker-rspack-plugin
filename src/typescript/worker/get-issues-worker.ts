@@ -1,5 +1,5 @@
 import type { FilesChange } from '../../files-change';
-import type { Issue } from '../../issue';
+import type { Issue, IssueDefaultSeverity } from '../../issue';
 import { exposeRpc } from '../../rpc';
 
 import { invalidateArtifacts, registerArtifacts } from './lib/artifacts';
@@ -29,7 +29,11 @@ import { dumpTracingLegendIfNeeded } from './lib/tracing';
 import { invalidateTsBuildInfo } from './lib/tsbuildinfo';
 import { config } from './lib/worker-config';
 
-const getIssuesWorker = async (change: FilesChange, watching: boolean): Promise<Issue[]> => {
+const getIssuesWorker = async (
+  change: FilesChange,
+  watching: boolean,
+  defaultSeverity: IssueDefaultSeverity,
+): Promise<Issue[]> => {
   system.invalidateCache();
 
   if (didConfigFileChanged(change)) {
@@ -57,7 +61,7 @@ const getIssuesWorker = async (change: FilesChange, watching: boolean): Promise<
   registerArtifacts();
   enablePerformanceIfNeeded();
 
-  const parseConfigIssues = getParseConfigIssues();
+  const parseConfigIssues = getParseConfigIssues(defaultSeverity);
   if (parseConfigIssues.length) {
     // report config parse issues and exit
     return parseConfigIssues;
@@ -84,7 +88,7 @@ const getIssuesWorker = async (change: FilesChange, watching: boolean): Promise<
   await system.waitForQueued();
 
   // retrieve all collected diagnostics as normalized issues
-  const issues = getIssues();
+  const issues = getIssues(defaultSeverity);
 
   dumpTracingLegendIfNeeded();
   printPerformanceMeasuresIfNeeded();

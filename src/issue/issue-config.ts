@@ -4,9 +4,11 @@ import { createIssuePredicateFromIssueMatch } from './issue-match';
 import type { IssuePredicateOption, IssueOptions } from './issue-options';
 import type { IssuePredicate } from './issue-predicate';
 import { composeIssuePredicates, createTrivialIssuePredicate } from './issue-predicate';
+import type { IssueDefaultSeverity } from './issue-severity';
 
 interface IssueConfig {
   predicate: IssuePredicate;
+  defaultSeverity: IssueDefaultSeverity;
 }
 
 function createIssuePredicateFromOption(
@@ -42,9 +44,11 @@ function createIssueConfig(
   const exclude = options.exclude
     ? createIssuePredicateFromOption(context, options.exclude)
     : createTrivialIssuePredicate(false);
+  const defaultSeverity = options.defaultSeverity ?? 'auto';
 
   return {
     predicate: (issue) => include(issue) && !exclude(issue),
+    defaultSeverity,
   };
 }
 
