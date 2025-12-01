@@ -35,10 +35,10 @@
   },
   "dependencies": {
     "@babel/code-frame": "^7.27.1",
-    "@rspack/lite-tapable": "^1.0.1",
+    "@rspack/lite-tapable": "^1.1.0",
     "chokidar": "^3.6.0",
     "is-glob": "^4.0.3",
-    "memfs": "^4.50.0",
+    "memfs": "^4.51.1",
     "minimatch": "^9.0.5",
     "picocolors": "^1.1.1"
   },
@@ -53,8 +53,8 @@
   },
   "devDependencies": {
     "@jest/console": "^27.5.1",
-    "@rslib/core": "^0.17.0",
-    "@rspack/core": "^1.6.0",
+    "@rslib/core": "^0.18.2",
+    "@rspack/core": "^1.6.5",
     "@types/babel__code-frame": "^7.0.6",
     "@types/is-glob": "^4.0.4",
     "@types/jest": "^27.5.2",
@@ -67,7 +67,7 @@
     "jest-environment-node": "^27.5.1",
     "jest-runner": "^27.5.1",
     "mock-fs": "^5.5.0",
-    "prettier": "^3.6.2",
+    "prettier": "^3.7.3",
     "strip-ansi": "^6.0.1",
     "ts-jest": "^27.1.5",
     "typescript": "^5.9.3"
@@ -76,5 +76,5 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "packageManager": "pnpm@10.20.0"
+  "packageManager": "pnpm@10.24.0"
 }
