@@ -20,7 +20,7 @@ function tapStartToRunWorkers(
   getIssuesWorker: RpcWorker<GetIssuesWorker>,
   getDependenciesWorker: RpcWorker<GetDependenciesWorker>,
   config: TsCheckerRspackPluginConfig,
-  state: TsCheckerRspackPluginState
+  state: TsCheckerRspackPluginState,
 ) {
   const hooks = getPluginHooks(compiler);
   const { log, debug } = getInfrastructureLogger(compiler);
@@ -81,7 +81,7 @@ function tapStartToRunWorkers(
           'Calling reporter service for incremental check.',
           `  Changed files: ${JSON.stringify(filesChange.changedFiles)}`,
           `  Deleted files: ${JSON.stringify(filesChange.deletedFiles)}`,
-        ].join('\n')
+        ].join('\n'),
       );
     } else {
       log('Calling reporter service for single check.');
@@ -96,7 +96,7 @@ function tapStartToRunWorkers(
           `Aggregating with previous files change, iteration ${iteration}.`,
           `  Changed files: ${JSON.stringify(aggregatedFilesChange.changedFiles)}`,
           `  Deleted files: ${JSON.stringify(aggregatedFilesChange.deletedFiles)}`,
-        ].join('\n')
+        ].join('\n'),
       );
     }
     state.aggregatedFilesChange = aggregatedFilesChange;
@@ -115,7 +115,11 @@ function tapStartToRunWorkers(
         return issuesPool.submit(async () => {
           try {
             debug(`Running the getIssuesWorker, iteration ${iteration}.`);
-            const issues = await getIssuesWorker(aggregatedFilesChange, state.watching);
+            const issues = await getIssuesWorker(
+              aggregatedFilesChange,
+              state.watching,
+              config.issue.defaultSeverity,
+            );
             if (state.aggregatedFilesChange === aggregatedFilesChange) {
               state.aggregatedFilesChange = undefined;
             }
