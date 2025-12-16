@@ -6,7 +6,7 @@ describe('typescript/type-script-support', () => {
   let configuration: TypeScriptWorkerConfig;
 
   beforeEach(() => {
-    jest.resetModules();
+    rs.resetModules();
 
     configuration = {
       configFile: './tsconfig.json',
@@ -28,7 +28,7 @@ describe('typescript/type-script-support', () => {
   });
 
   it('throws error if typescript is not installed', async () => {
-    jest.setMock('typescript', undefined);
+    rs.setMock('typescript', undefined);
 
     const { assertTypeScriptSupport } = await import('src/typescript/type-script-support');
 
@@ -38,8 +38,8 @@ describe('typescript/type-script-support', () => {
   });
 
   it('throws error if there is no tsconfig.json file', async () => {
-    jest.setMock('typescript', { version: '3.8.0' });
-    jest.setMock('node:fs', { existsSync: () => false });
+    rs.setMock('typescript', { version: '3.8.0' });
+    rs.setMock('node:fs', { existsSync: () => false });
 
     const { assertTypeScriptSupport } = await import('src/typescript/type-script-support');
 

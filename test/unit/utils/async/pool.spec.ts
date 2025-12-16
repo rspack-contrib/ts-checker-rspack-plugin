@@ -15,8 +15,8 @@ describe('createPool', () => {
 
   it('limits concurrency', async () => {
     const pool = createPool(2);
-    const shortTask = jest.fn(() => wait(10));
-    const longTask = jest.fn(() => wait(500));
+    const shortTask = rs.fn(() => wait(10));
+    const longTask = rs.fn(() => wait(500));
 
     pool.submit(shortTask);
     pool.submit(shortTask);
@@ -37,7 +37,7 @@ describe('createPool', () => {
 
   it('works after draining', async () => {
     const pool = createPool(2);
-    const shortTask = jest.fn(() => wait(10));
+    const shortTask = rs.fn(() => wait(10));
 
     pool.submit(shortTask);
     pool.submit(shortTask);

@@ -1,6 +1,6 @@
 import { isInsideAnotherPath } from '../../../../src/utils/path/is-inside-another-path';
 
-jest.mock('path', () => jest.requireActual('path').posix);
+rs.mock('path', () => rs.requireActual('path').posix);
 
 const unixTests: [string, string, boolean][] = [
   // Identical

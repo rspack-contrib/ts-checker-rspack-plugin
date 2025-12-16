@@ -13,17 +13,17 @@ describe('wrapRpc', () => {
     childProcessMock = {
       connected: true,
       pid: 1234,
-      send: jest.fn((message, callback) => {
+      send: rs.fn((message, callback) => {
         messageIds.push(message?.id);
         callback();
       }),
-      on: jest.fn((name, handlerToAdd) => {
+      on: rs.fn((name, handlerToAdd) => {
         if (!eventHandlers[name]) {
           eventHandlers[name] = [];
         }
         eventHandlers[name].push(handlerToAdd);
       }),
-      off: jest.fn((name, handlerToRemove) => {
+      off: rs.fn((name, handlerToRemove) => {
         if (!eventHandlers[name]) {
           return;
         }
@@ -134,7 +134,7 @@ describe('wrapRpc', () => {
   });
 
   it('rejects on send error', async () => {
-    (childProcessMock.send as jest.Mock).mockImplementation((message, callback) =>
+    (childProcessMock.send as rs.Mock).mockImplementation((message, callback) =>
       callback(new Error('cannot send'))
     );
     const wrapped = wrapRpc<() => void>(childProcessMock);

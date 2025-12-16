@@ -1,15 +1,19 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "lib": ["ES6"],
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "resolveJsonModule": true,
-    "baseUrl": "../"
-  },
-  "include": ["../src", "**/*.spec.ts"],
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+		"lib": ["ES6"],
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"resolveJsonModule": true,
+		"types": ["@rstest/core/globals"],
+		"paths": {
+			"src": ["../src"]
+		},
+		"baseUrl": "../"
+	},
+	"include": ["../src", "**/*.spec.ts"],
+	"exclude": ["node_modules"]
 }
