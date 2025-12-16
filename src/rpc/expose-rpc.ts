@@ -4,7 +4,7 @@ import type { RpcMessage } from './types';
 function isClosedIpcChannelError(error: unknown): boolean {
   if (typeof error === 'object' && error !== null && 'code' in error) {
     const CLOSED_IPC_ERROR_CODES = new Set(['ERR_IPC_CHANNEL_CLOSED', 'EPIPE']);
-    return Boolean(CLOSED_IPC_ERROR_CODES.has(error.code as string));
+    return CLOSED_IPC_ERROR_CODES.has(error.code as string);
   }
   return false;
 }
