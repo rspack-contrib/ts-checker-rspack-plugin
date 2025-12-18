@@ -28,7 +28,7 @@ describe('typescript/type-script-support', () => {
   });
 
   it('throws error if typescript is not installed', async () => {
-    rs.setMock('typescript', undefined);
+    rs.mock('typescript', undefined);
 
     const { assertTypeScriptSupport } = await import('src/typescript/type-script-support');
 
@@ -38,8 +38,8 @@ describe('typescript/type-script-support', () => {
   });
 
   it('throws error if there is no tsconfig.json file', async () => {
-    rs.setMock('typescript', { version: '3.8.0' });
-    rs.setMock('node:fs', { existsSync: () => false });
+    rs.mock('typescript', { version: '3.8.0' });
+    rs.mock('node:fs', { existsSync: () => false });
 
     const { assertTypeScriptSupport } = await import('src/typescript/type-script-support');
 

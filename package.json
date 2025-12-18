@@ -54,7 +54,7 @@
   "devDependencies": {
     "@rslib/core": "^0.18.2",
     "@rspack/core": "^1.6.5",
-    "@rstest/core": "^0.7.3",
+    "@rstest/core": "^0.7.5",
     "@types/babel__code-frame": "^7.0.6",
     "@types/is-glob": "^4.0.4",
     "@types/mock-fs": "^4.13.4",
