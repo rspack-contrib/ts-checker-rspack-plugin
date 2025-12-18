@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { minimatch } from 'minimatch';
 
 import { forwardSlash } from '../utils/path/forward-slash';

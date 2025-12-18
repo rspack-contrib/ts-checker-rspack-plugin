@@ -2,10 +2,10 @@ import pc from 'picocolors';
 import type * as rspack from '@rspack/core';
 
 import { statsFormatter } from '../formatter/stats-formatter';
-import { createWebpackFormatter } from '../formatter/webpack-formatter';
+import { createRspackFormatter } from '../formatter/rspack-formatter';
 import { getInfrastructureLogger } from '../infrastructure-logger';
 import type { Issue } from '../issue';
-import { IssueWebpackError } from '../issue/issue-webpack-error';
+import { IssueRspackError } from '../issue/issue-rspack-error';
 import type { TsCheckerRspackPluginConfig } from '../plugin-config';
 import { getPluginHooks } from '../plugin-hooks';
 import type { TsCheckerRspackPluginState } from '../plugin-state';
@@ -34,7 +34,7 @@ function tapDoneToAsyncGetIssues(
         hooks.waiting.call(stats.compilation);
         config.logger.log(pc.cyan('[type-check] in progress...'));
       } else {
-        // wait 10ms to log issues after webpack stats
+        // wait 10ms to log issues after Rspack stats
         await wait(10);
       }
 
@@ -59,10 +59,10 @@ function tapDoneToAsyncGetIssues(
     // modify list of issues in the plugin hooks
     issues = hooks.issues.call(issues, stats.compilation);
 
-    const formatter = createWebpackFormatter(config.formatter.format, config.formatter.pathType);
+    const formatter = createRspackFormatter(config.formatter.format, config.formatter.pathType);
 
     if (issues.length) {
-      // follow webpack's approach - one process.write to stderr with all errors and warnings
+      // follow Rspack's approach - one process.write to stderr with all errors and warnings
       config.logger.error(issues.map((issue) => formatter(issue)).join('\n'));
     }
 
@@ -73,7 +73,7 @@ function tapDoneToAsyncGetIssues(
     // skip reporting if there are no issues, to avoid an extra hot reload
     if (issues.length && state.DevServerDoneTap) {
       issues.forEach((issue) => {
-        const error = new IssueWebpackError(
+        const error = new IssueRspackError(
           config.formatter.format(issue),
           config.formatter.pathType,
           issue

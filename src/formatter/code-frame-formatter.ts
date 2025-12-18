@@ -1,4 +1,4 @@
-import os from 'os';
+import os from 'node:os';
 
 import { codeFrameColumns } from '@babel/code-frame';
 import fs from 'node:fs';

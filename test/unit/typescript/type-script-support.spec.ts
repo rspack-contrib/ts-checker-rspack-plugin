@@ -1,4 +1,4 @@
-import os from 'os';
+import os from 'node:os';
 
 import type { TypeScriptWorkerConfig } from 'src/typescript/type-script-worker-config';
 
@@ -46,9 +46,9 @@ describe('typescript/type-script-support', () => {
     expect(() => assertTypeScriptSupport(configuration)).toThrowError(
       [
         `Cannot find the "./tsconfig.json" file.`,
-        `Please check webpack and TsCheckerRspackPlugin configuration.`,
+        `Please check Rspack and TsCheckerRspackPlugin configuration.`,
         `Possible errors:`,
-        '  - wrong `context` directory in webpack configuration (if `configFile` is not set or is a relative path in the fork plugin configuration)',
+        '  - wrong `context` directory in Rspack configuration (if `configFile` is not set or is a relative path in the fork plugin configuration)',
         '  - wrong `typescript.configFile` path in the plugin configuration (should be a relative or absolute path)',
       ].join(os.EOL)
     );

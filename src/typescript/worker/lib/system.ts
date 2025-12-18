@@ -1,4 +1,4 @@
-import { dirname, join } from 'path';
+import { dirname, join } from 'node:path';
 
 import type * as ts from 'typescript';
 
@@ -24,13 +24,13 @@ export interface ControlledTypeScriptSystem extends ts.System {
     path: string,
     callback: ts.FileWatcherCallback,
     pollingInterval?: number,
-    options?: ts.WatchOptions
+    options?: ts.WatchOptions,
   ): ts.FileWatcher;
   watchDirectory(
     path: string,
     callback: ts.DirectoryWatcherCallback,
     recursive?: boolean,
-    options?: ts.WatchOptions
+    options?: ts.WatchOptions,
   ): ts.FileWatcher;
   getModifiedTime(path: string | undefined): Date | undefined;
   setModifiedTime(path: string, time: Date): void;
@@ -109,7 +109,7 @@ export const system: ControlledTypeScriptSystem = {
       .filter(
         (dirent) =>
           dirent.isDirectory() ||
-          (dirent.isSymbolicLink() && system.directoryExists(join(path, dirent.name)))
+          (dirent.isSymbolicLink() && system.directoryExists(join(path, dirent.name))),
       )
       .map((dirent) => dirent.name);
   },
@@ -135,12 +135,12 @@ export const system: ControlledTypeScriptSystem = {
   watchDirectory(
     path: string,
     callback: ts.DirectoryWatcherCallback,
-    recursive = false
+    recursive = false,
   ): ts.FileWatcher {
     return createWatcher(
       recursive ? recursiveDirectoryWatcherCallbacksMap : directoryWatcherCallbacksMap,
       path,
-      callback
+      callback,
     );
   },
   // use immediate instead of timeout to avoid waiting 250ms for batching files changes
@@ -206,7 +206,7 @@ export const system: ControlledTypeScriptSystem = {
 function createWatcher<TCallback>(
   watchersMap: Map<string, TCallback[]>,
   path: string,
-  callback: TCallback
+  callback: TCallback,
 ) {
   const normalizedPath = normalizeAndResolvePath(path);
   const watchers = watchersMap.get(normalizedPath) || [];
@@ -230,7 +230,7 @@ function createWatcher<TCallback>(
 function invokeFileWatchers(path: string, event: ts.FileWatcherEventKind) {
   const normalizedPath = normalizeAndResolvePath(path);
   if (normalizedPath.endsWith('.js')) {
-    // trigger relevant .d.ts file watcher - handles the case, when we have webpack watcher
+    // trigger relevant .d.ts file watcher - handles the case, when we have Rspack watcher
     // that points to a symlinked package
     invokeFileWatchers(normalizedPath.slice(0, -3) + '.d.ts', event);
   }
@@ -238,9 +238,9 @@ function invokeFileWatchers(path: string, event: ts.FileWatcherEventKind) {
   const fileWatcherCallbacks = fileWatcherCallbacksMap.get(normalizedPath);
   if (fileWatcherCallbacks) {
     // typescript expects normalized paths with posix forward slash
-    fileWatcherCallbacks.forEach((fileWatcherCallback) =>
-      fileWatcherCallback(forwardSlash(normalizedPath), event)
-    );
+    fileWatcherCallbacks.forEach((fileWatcherCallback) => {
+      fileWatcherCallback(forwardSlash(normalizedPath), event);
+    });
   }
 }
 
@@ -254,9 +254,9 @@ function invokeDirectoryWatchers(path: string) {
 
   const directoryWatcherCallbacks = directoryWatcherCallbacksMap.get(directory);
   if (directoryWatcherCallbacks) {
-    directoryWatcherCallbacks.forEach((directoryWatcherCallback) =>
-      directoryWatcherCallback(forwardSlash(normalizedPath))
-    );
+    directoryWatcherCallbacks.forEach((directoryWatcherCallback) => {
+      directoryWatcherCallback(forwardSlash(normalizedPath));
+    });
   }
 
   recursiveDirectoryWatcherCallbacksMap.forEach(
@@ -266,11 +266,11 @@ function invokeDirectoryWatchers(path: string) {
         (directory.startsWith(watchedDirectory) &&
           forwardSlash(directory)[watchedDirectory.length] === '/')
       ) {
-        recursiveDirectoryWatcherCallbacks.forEach((recursiveDirectoryWatcherCallback) =>
-          recursiveDirectoryWatcherCallback(forwardSlash(normalizedPath))
-        );
+        recursiveDirectoryWatcherCallbacks.forEach((recursiveDirectoryWatcherCallback) => {
+          recursiveDirectoryWatcherCallback(forwardSlash(normalizedPath));
+        });
       }
-    }
+    },
   );
 }
 

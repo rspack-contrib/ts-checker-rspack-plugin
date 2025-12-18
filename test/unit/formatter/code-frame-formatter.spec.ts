@@ -1,4 +1,4 @@
-import * as os from 'os';
+import * as os from 'node:os';
 
 import mockFs from 'mock-fs';
 import { createCodeFrameFormatter } from 'src/formatter';

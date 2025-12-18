@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 import type { TypeScriptWorkerConfig } from 'src/typescript/type-script-worker-config';
 import type { TypeScriptWorkerOptions } from 'src/typescript/type-script-worker-options';

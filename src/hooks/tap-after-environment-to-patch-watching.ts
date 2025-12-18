@@ -14,7 +14,7 @@ function tapAfterEnvironmentToPatchWatching(
   compiler.hooks.afterEnvironment.tap('TsCheckerRspackPlugin', () => {
     const watchFileSystem = compiler.watchFileSystem;
     if (watchFileSystem) {
-      debug("Overwriting webpack's watch file system.");
+      debug("Overwriting Rspack's watch file system.");
       // wrap original watch file system
       compiler.watchFileSystem = new InclusiveNodeWatchFileSystem(
         // we use some internals here

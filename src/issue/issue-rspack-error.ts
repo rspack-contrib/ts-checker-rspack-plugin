@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import type { FormatterPathType } from '../formatter';
 import { forwardSlash } from '../utils/path/forward-slash';
 import { relativeToContext } from '../utils/path/relative-to-context';
@@ -6,7 +6,7 @@ import { relativeToContext } from '../utils/path/relative-to-context';
 import type { Issue } from './issue';
 import { formatIssueLocation } from './issue-location';
 
-class IssueWebpackError extends Error {
+class IssueRspackError extends Error {
   readonly hideStack = true;
 
   file?: string;
@@ -32,4 +32,4 @@ class IssueWebpackError extends Error {
   }
 }
 
-export { IssueWebpackError };
+export { IssueRspackError };

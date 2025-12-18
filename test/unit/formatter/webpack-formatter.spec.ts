@@ -1,8 +1,8 @@
-import os from 'os';
-import { join } from 'path';
+import os from 'node:os';
+import { join } from 'node:path';
 
 import type { Formatter } from 'src/formatter';
-import { createBasicFormatter, createWebpackFormatter } from 'src/formatter';
+import { createBasicFormatter, createRspackFormatter } from 'src/formatter';
 import type { Issue } from 'src/issue';
 import { forwardSlash } from 'src/utils/path/forward-slash';
 
@@ -28,8 +28,8 @@ describe('formatter/webpack-formatter', () => {
   let absoluteFormatter: Formatter;
 
   beforeEach(() => {
-    relativeFormatter = createWebpackFormatter(createBasicFormatter(), 'relative');
-    absoluteFormatter = createWebpackFormatter(createBasicFormatter(), 'absolute');
+    relativeFormatter = createRspackFormatter(createBasicFormatter(), 'relative');
+    absoluteFormatter = createRspackFormatter(createBasicFormatter(), 'absolute');
   });
 
   it('decorates existing relativeFormatter', () => {
