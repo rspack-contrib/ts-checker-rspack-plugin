@@ -12,6 +12,7 @@ let solutionBuilderHost:
   | ts.SolutionBuilderWithWatchHost<ts.SemanticDiagnosticsBuilderProgram>
   | undefined;
 let solutionBuilder: ts.SolutionBuilder<ts.SemanticDiagnosticsBuilderProgram> | undefined;
+let hostDiagnostics: ts.Diagnostic[] = [];
 
 export function useSolutionBuilder() {
   if (!solutionBuilderHost) {
@@ -25,7 +26,7 @@ export function useSolutionBuilder() {
         host,
         oldProgram,
         configFileParsingDiagnostics,
-        projectReferences
+        projectReferences,
       ) => {
         if (compilerOptions) {
           startTracingIfNeeded(compilerOptions);
@@ -36,28 +37,38 @@ export function useSolutionBuilder() {
           host,
           oldProgram,
           configFileParsingDiagnostics,
-          projectReferences
+          projectReferences,
         );
+      },
+      (diagnostic) => {
+        // SolutionBuilder can emit graph-level diagnostics while building the project graph
+        // (e.g. invalid/cyclic project references) — i.e. before any Program/BuilderProgram exists.
+        hostDiagnostics.push(diagnostic);
+        updateDiagnostics(config.configFile, hostDiagnostics);
       },
       undefined,
       undefined,
       undefined,
-      undefined,
       (builderProgram) => {
+        const programConfigFile = getConfigFilePathFromBuilderProgram(builderProgram);
+        const programDiagnostics = getDiagnosticsOfProgram(builderProgram);
+
         updateDiagnostics(
-          getConfigFilePathFromBuilderProgram(builderProgram),
-          getDiagnosticsOfProgram(builderProgram)
+          programConfigFile,
+          programConfigFile === config.configFile
+            ? [...programDiagnostics, ...hostDiagnostics]
+            : programDiagnostics,
         );
         emitTsBuildInfoIfNeeded(builderProgram);
         stopTracingIfNeeded(builderProgram);
-      }
+      },
     );
   }
   if (!solutionBuilder) {
     solutionBuilder = typescript.createSolutionBuilderWithWatch(
       solutionBuilderHost,
       [config.configFile],
-      { watch: true }
+      { watch: true },
     );
     solutionBuilder.build();
   }
@@ -68,4 +79,5 @@ export function invalidateSolutionBuilder(withHost = false) {
     solutionBuilderHost = undefined;
   }
   solutionBuilder = undefined;
+  hostDiagnostics = [];
 }

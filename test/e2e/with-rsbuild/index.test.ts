@@ -165,3 +165,29 @@ test('should not throw error when the file is excluded by code', async () => {
 
   await expect(rsbuild.build()).resolves.toBeTruthy();
 });
+
+test('should host diagnostics in SolutionBuilder (e.g. TS6202 for circular project references)', async () => {
+  const { logs, restore } = proxyConsole();
+
+  const rsbuild = await createRsbuild({
+    rsbuildConfig: {
+      tools: {
+        rspack: {
+          plugins: [
+            new TsCheckerRspackPlugin({
+              typescript: {
+                build: true,
+                configFile: './tsconfig.circular.json',
+              },
+            }),
+          ],
+        },
+      },
+    },
+  });
+
+  await expect(rsbuild.build()).rejects.toThrowError('build failed!');
+  expect(logs.find((log) => log.includes('TS6202'))).toBeTruthy();
+
+  restore();
+});
