@@ -1,4 +1,4 @@
-import { relative, isAbsolute } from 'path';
+import { relative, isAbsolute } from 'node:path';
 
 function isInsideAnotherPath(parent: string, directory: string): boolean {
   const relativePart = relative(parent, directory);

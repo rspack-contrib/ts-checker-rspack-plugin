@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 describe('Webpack Node Api', () => {
   it.each([{ webpack: '5.11.0' }, { webpack: '^5.11.0' }])(

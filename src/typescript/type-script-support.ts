@@ -1,4 +1,4 @@
-import os from 'os';
+import os from 'node:os';
 import fs from 'node:fs';
 
 import type { TypeScriptWorkerConfig } from './type-script-worker-config';

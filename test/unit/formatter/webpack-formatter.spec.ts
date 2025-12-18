@@ -1,5 +1,5 @@
-import os from 'os';
-import { join } from 'path';
+import os from 'node:os';
+import { join } from 'node:path';
 
 import type { Formatter } from 'src/formatter';
 import { createBasicFormatter, createRspackFormatter } from 'src/formatter';

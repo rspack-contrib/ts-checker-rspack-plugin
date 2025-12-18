@@ -1,5 +1,5 @@
-import type { Dirent, Stats } from 'fs';
-import { dirname } from 'path';
+import type { Dirent, Stats } from 'node:fs';
+import { dirname } from 'node:path';
 
 import { fs as mem } from 'memfs';
 

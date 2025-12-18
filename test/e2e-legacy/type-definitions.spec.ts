@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 describe('Type Definitions', () => {
   it('provides valid type definitions', async () => {

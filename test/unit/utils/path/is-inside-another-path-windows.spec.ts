@@ -1,6 +1,6 @@
 import { isInsideAnotherPath } from '../../../../src/utils/path/is-inside-another-path';
 
-jest.mock('path', () => jest.requireActual('path').win32);
+jest.mock('node:path', () => jest.requireActual('node:path').win32);
 
 const windowsTests: [string, string, boolean][] = [
   // subfolder
