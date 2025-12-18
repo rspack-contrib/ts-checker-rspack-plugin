@@ -1,5 +1,5 @@
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
-import type { Dirent, Stats } from 'fs';
+import type { Dirent, Stats } from 'node:fs';
 
 /**
  * Interface to abstract file system implementation details.

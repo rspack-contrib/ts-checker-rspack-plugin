@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 import { createSandbox, packLocalPackage } from 'karton';
 import type { Sandbox } from 'karton';

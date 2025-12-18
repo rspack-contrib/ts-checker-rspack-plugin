@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import type { FormatterPathType } from '../formatter';
 import { forwardSlash } from '../utils/path/forward-slash';
 import { relativeToContext } from '../utils/path/relative-to-context';

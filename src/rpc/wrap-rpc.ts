@@ -1,4 +1,4 @@
-import type { ChildProcess } from 'child_process';
+import type { ChildProcess } from 'node:child_process';
 
 import { createControlledPromise } from '../utils/async/controlled-promise';
 

@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 import { extractWebpackErrors } from './driver/webpack-errors-extractor';
 

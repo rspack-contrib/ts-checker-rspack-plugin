@@ -1,6 +1,6 @@
-import * as child_process from 'child_process';
-import type { ChildProcess, ForkOptions } from 'child_process';
-import * as process from 'process';
+import * as child_process from 'node:child_process';
+import type { ChildProcess, ForkOptions } from 'node:child_process';
+import * as process from 'node:process';
 
 import type { RpcMethod, RpcRemoteMethod } from './types';
 import { wrapRpc } from './wrap-rpc';

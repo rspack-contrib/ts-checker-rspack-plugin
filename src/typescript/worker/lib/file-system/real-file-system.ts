@@ -1,5 +1,5 @@
-import type { Dirent, Stats } from 'fs';
-import { dirname, basename, join, normalize } from 'path';
+import type { Dirent, Stats } from 'node:fs';
+import { dirname, basename, join, normalize } from 'node:path';
 
 import fs from 'node:fs';
 
