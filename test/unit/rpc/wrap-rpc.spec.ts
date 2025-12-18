@@ -105,7 +105,7 @@ describe('wrapRpc', () => {
       value: 41,
     });
 
-    expect(promise).resolves.toEqual(41);
+    await expect(promise).resolves.toEqual(41);
     expect(eventHandlers).toEqual({
       message: [],
       close: [],
@@ -126,7 +126,7 @@ describe('wrapRpc', () => {
       error: 'sad error',
     });
 
-    expect(promise).rejects.toEqual('sad error');
+    await expect(promise).rejects.toEqual('sad error');
     expect(eventHandlers).toEqual({
       message: [],
       close: [],
@@ -139,7 +139,7 @@ describe('wrapRpc', () => {
     );
     const wrapped = wrapRpc<() => void>(childProcessMock);
 
-    expect(wrapped()).rejects.toEqual(new Error('cannot send'));
+    await expect(wrapped()).rejects.toEqual(new Error('cannot send'));
     expect(eventHandlers).toEqual({
       message: [],
       close: [],
@@ -158,7 +158,7 @@ describe('wrapRpc', () => {
 
     triggerClose(code, signal);
 
-    expect(promise).rejects.toEqual(new RpcExitError(message, code, signal));
+    await expect(promise).rejects.toEqual(new RpcExitError(message, code, signal));
     expect(eventHandlers).toEqual({
       message: [],
       close: [],

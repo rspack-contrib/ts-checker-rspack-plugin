@@ -1,6 +1,11 @@
 import { isInsideAnotherPath } from '../../../../src/utils/path/is-inside-another-path';
 
-rs.mock('node:path', () => rs.requireActual('node:path').posix);
+const mockedPath = rs.hoisted(() => {
+  const path = rs.requireActual('node:path');
+  return path.posix;
+});
+
+rs.mock('node:path', () => mockedPath);
 
 const unixTests: [string, string, boolean][] = [
   // Identical

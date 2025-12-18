@@ -10,4 +10,7 @@ export default defineConfig({
   source: {
     tsconfigPath: '../tsconfig.json',
   },
+  output: {
+    module: true,
+  }
 });

@@ -1,6 +1,12 @@
 import { isInsideAnotherPath } from '../../../../src/utils/path/is-inside-another-path';
 
-rs.mock('node:path', () => rs.requireActual('node:path').win32);
+// fixed https://github.com/web-infra-dev/rstest/issues/785
+const mockedPath = rs.hoisted(() => {
+  const path = rs.requireActual('node:path');
+  return path.win32;
+});
+
+rs.mock('node:path', () => mockedPath);
 
 const windowsTests: [string, string, boolean][] = [
   // subfolder
