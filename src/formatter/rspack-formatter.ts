@@ -9,9 +9,9 @@ import { relativeToContext } from '../utils/path/relative-to-context';
 
 import type { Formatter, FormatterPathType } from './formatter';
 
-function createWebpackFormatter(formatter: Formatter, pathType: FormatterPathType): Formatter {
-  // mimics webpack error formatter
-  return function webpackFormatter(issue) {
+function createRspackFormatter(formatter: Formatter, pathType: FormatterPathType): Formatter {
+  // mimics Rspack error formatter
+  return function rspackFormatter(issue) {
     const color = issue.severity === 'warning' ? pc.yellow : pc.red;
 
     const severity = issue.severity.toUpperCase();
@@ -33,4 +33,4 @@ function createWebpackFormatter(formatter: Formatter, pathType: FormatterPathTyp
   };
 }
 
-export { createWebpackFormatter };
+export { createRspackFormatter };

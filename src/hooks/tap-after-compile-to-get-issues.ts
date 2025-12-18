@@ -2,7 +2,7 @@ import type * as rspack from '@rspack/core';
 
 import { getInfrastructureLogger } from '../infrastructure-logger';
 import type { Issue } from '../issue';
-import { IssueWebpackError } from '../issue/issue-webpack-error';
+import { IssueRspackError } from '../issue/issue-rspack-error';
 import type { TsCheckerRspackPluginConfig } from '../plugin-config';
 import { getPluginHooks } from '../plugin-hooks';
 import type { TsCheckerRspackPluginState } from '../plugin-state';
@@ -44,7 +44,7 @@ function tapAfterCompileToGetIssues(
     issues = hooks.issues.call(issues, compilation);
 
     issues.forEach((issue) => {
-      const error = new IssueWebpackError(
+      const error = new IssueRspackError(
         config.formatter.format(issue),
         config.formatter.pathType,
         issue
