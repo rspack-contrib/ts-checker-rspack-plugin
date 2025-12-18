@@ -13,17 +13,17 @@ describe('wrapRpc', () => {
     childProcessMock = {
       connected: true,
       pid: 1234,
-      send: jest.fn((message, callback) => {
+      send: rs.fn((message, callback) => {
         messageIds.push(message?.id);
         callback();
       }),
-      on: jest.fn((name, handlerToAdd) => {
+      on: rs.fn((name, handlerToAdd) => {
         if (!eventHandlers[name]) {
           eventHandlers[name] = [];
         }
         eventHandlers[name].push(handlerToAdd);
       }),
-      off: jest.fn((name, handlerToRemove) => {
+      off: rs.fn((name, handlerToRemove) => {
         if (!eventHandlers[name]) {
           return;
         }
@@ -105,7 +105,7 @@ describe('wrapRpc', () => {
       value: 41,
     });
 
-    expect(promise).resolves.toEqual(41);
+    await expect(promise).resolves.toEqual(41);
     expect(eventHandlers).toEqual({
       message: [],
       close: [],
@@ -126,7 +126,7 @@ describe('wrapRpc', () => {
       error: 'sad error',
     });
 
-    expect(promise).rejects.toEqual('sad error');
+    await expect(promise).rejects.toEqual('sad error');
     expect(eventHandlers).toEqual({
       message: [],
       close: [],
@@ -134,12 +134,12 @@ describe('wrapRpc', () => {
   });
 
   it('rejects on send error', async () => {
-    (childProcessMock.send as jest.Mock).mockImplementation((message, callback) =>
+    (childProcessMock.send as rs.Mock).mockImplementation((message, callback) =>
       callback(new Error('cannot send'))
     );
     const wrapped = wrapRpc<() => void>(childProcessMock);
 
-    expect(wrapped()).rejects.toEqual(new Error('cannot send'));
+    await expect(wrapped()).rejects.toEqual(new Error('cannot send'));
     expect(eventHandlers).toEqual({
       message: [],
       close: [],
@@ -158,7 +158,7 @@ describe('wrapRpc', () => {
 
     triggerClose(code, signal);
 
-    expect(promise).rejects.toEqual(new RpcExitError(message, code, signal));
+    await expect(promise).rejects.toEqual(new RpcExitError(message, code, signal));
     expect(eventHandlers).toEqual({
       message: [],
       close: [],

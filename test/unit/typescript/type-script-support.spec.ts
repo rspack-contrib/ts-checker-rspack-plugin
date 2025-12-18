@@ -1,12 +1,12 @@
 import os from 'node:os';
-
+import fs from 'node:fs';
 import type { TypeScriptWorkerConfig } from 'src/typescript/type-script-worker-config';
 
 describe('typescript/type-script-support', () => {
   let configuration: TypeScriptWorkerConfig;
 
   beforeEach(() => {
-    jest.resetModules();
+    rs.resetModules();
 
     configuration = {
       configFile: './tsconfig.json',
@@ -28,18 +28,20 @@ describe('typescript/type-script-support', () => {
   });
 
   it('throws error if typescript is not installed', async () => {
-    jest.setMock('typescript', undefined);
-
     const { assertTypeScriptSupport } = await import('src/typescript/type-script-support');
 
-    expect(() => assertTypeScriptSupport(configuration)).toThrowError(
+    expect(() => assertTypeScriptSupport({
+      ...configuration,
+      typescriptPath: 'typescript-404',
+    })).toThrowError(
       'When you use TsCheckerRspackPlugin with typescript reporter enabled, you must install `typescript` package.'
     );
   });
 
   it('throws error if there is no tsconfig.json file', async () => {
-    jest.setMock('typescript', { version: '3.8.0' });
-    jest.setMock('node:fs', { existsSync: () => false });
+    rs.mock('typescript', () => ({ version: '3.8.0' }));
+
+    rs.spyOn(fs, 'existsSync').mockImplementation(() => false);
 
     const { assertTypeScriptSupport } = await import('src/typescript/type-script-support');
 

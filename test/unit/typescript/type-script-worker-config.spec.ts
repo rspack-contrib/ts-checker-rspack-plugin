@@ -34,7 +34,7 @@ describe('typescript/type-scripts-worker-config', () => {
     } as rspack.Compiler;
   });
   afterEach(() => {
-    jest.resetModules();
+    rs.resetModules();
   });
 
   it.each([
